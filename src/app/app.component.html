@@ -39,7 +39,7 @@
         <div class="row gap-2 justify-content-center">
           <rental-card (addVehicleToRent)="onAddCarToRent(vehicle)"
                        *ngFor="let vehicle of vehicles, index as i"
-                       [dailyPrice]="getDailyPriceWithCurrency(vehicle?.class)"
+                       [dailyPrice]="getDailyPriceWithCurrency(vehicle.class)"
                        [disabledBtn]="!rentalCalculator.rentalDays"
                        [index]="i"
                        [pickedVehicleId]="rentalCalculator.pickedRentalID"
@@ -54,7 +54,7 @@
           ></rental-summary>
           <rental-checkout
             (onCheckoutClick)="onCheckoutClick()"
-            [isDisabled]="!rentalCalculator.rentalDays && rentalCalculator.rentalPrice == 0"
+            [isDisabled]="isCheckoutDisabled()"
           ></rental-checkout>
         </div>
       </div>

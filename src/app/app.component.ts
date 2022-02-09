@@ -56,6 +56,10 @@ export class AppComponent implements OnInit {
     })
   }
 
+  isCheckoutDisabled() {
+    return !this.rentalCalculator.rentalDays || this.rentalCalculator.rentalPrice == 0
+  }
+
   getDailyPriceWithCurrency(vehicleClass: any) {
     return this.pricingService.getByClass(vehicleClass)
   }
