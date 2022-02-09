@@ -9,7 +9,7 @@ export class CardComponent implements OnInit {
   @Input() vehicle!: IVehicle;
   @Input() disabledBtn: boolean = false;
   @Input() pickedVehicleId: any;
-  @Input() dailyPrice: any = 0;
+  @Input() dailyPrice: number = 0;
   @Input() index: any; // test
 
   // outputs

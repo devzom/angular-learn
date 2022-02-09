@@ -5,6 +5,7 @@ interface IVehicle {
   year: number;
   class?: string;
   imageSrc?: string;
+  dailyPrice?: number;
 }
 
 

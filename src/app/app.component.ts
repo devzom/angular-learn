@@ -5,6 +5,7 @@ import {RentalCalculatorService} from "./services/rental-calculator.service";
 import {RentalCheckoutService} from "./services/rental-checkout.service";
 import {RentalPricingService} from "./services/rental-pricing.service";
 import {DefinitionDirective} from "./directives/definition.directive";
+import {RentalListService} from "./services/rental-list.service";
 
 @Component({
   selector: 'app-root',
@@ -14,13 +15,7 @@ import {DefinitionDirective} from "./directives/definition.directive";
 export class AppComponent implements OnInit {
   @Input() car: any;
 
-  constructor(public rentalCalculator: RentalCalculatorService,
-              public checkoutService: RentalCheckoutService,
-              public pricingService: RentalPricingService,
-              private titleService: Title
-  ) {
-    titleService.setTitle('Car rental')
-  }
+  vehicles = this.rentalListService.getAvailableVehicles()
 
 
   ngOnInit(): void {
@@ -35,7 +30,15 @@ export class AppComponent implements OnInit {
 
   isLoading: boolean = true
   daysAmount = this.rentalCalculator.rentalDays
-  vehicles = this.rentalCalculator.vehicles
+
+  constructor(public rentalCalculator: RentalCalculatorService,
+              public checkoutService: RentalCheckoutService,
+              public pricingService: RentalPricingService,
+              private titleService: Title,
+              public rentalListService: RentalListService
+  ) {
+    titleService.setTitle('Car rental')
+  }
 
 
   onAddCarToRent(car: IVehicle) {

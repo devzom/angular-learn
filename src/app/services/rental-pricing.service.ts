@@ -12,7 +12,7 @@ export class RentalPricingService {
     'A': 120, 'B': 99, 'C': 79
   }
 
-  public currency = "$"
+  public currency = "USD"
 
   constructor() {
   }
