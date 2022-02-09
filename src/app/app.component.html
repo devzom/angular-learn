@@ -1,58 +1,65 @@
-<base-hero
-  description="Test everything"
-  title="Angular test app"
->
-  <h1 class="h4" slot="title">Angular CAR RENT</h1>
-  <p class="h6" slot="description">Pick amount of days and pick the car you would love to drive</p>
+<div *ngIf="isLoading" class="d-flex flex-grow-1 flex-row justify-content-center align-items-center">
+  <base-hero
+  >
+    <h1 class="h4 py-5" slot="title">Loading...</h1>
+  </base-hero>
+</div>
 
-</base-hero>
-<div class="container mt-4">
-  <div class="row">
-    <div class="col-12 d-flex gap-4 flex-column">
-      <div class="row d-flex justify-content-center p-2">
-        <div class="col-auto d-flex flex-row align-items-center gap-2">
-          <p class="text-nowrap">Days:</p>
-          <input (ngModelChange)="onSetRentalDays($event)" [ngModel]="daysAmount" class="form-control form-control-sm"
-                 id="days_amount" max="100"
-                 min="1"
-                 minlength="1"
-                 name="days_amount"
-                 placeholder="" required
-                 step="1" type="number">
+<div *ngIf="!vehicles.length && !isLoading"
+     class="d-flex flex-grow-1 flex-row justify-content-center align-items-center">
+  <base-hero
+  >
+    <h1 class="h4 py-5" slot="title">No data provided</h1>
+    <p>Check provided vehicle list</p>
+  </base-hero>
+</div>
 
+<div *ngIf="vehicles.length && !isLoading">
+  <base-hero
+  >
+    <h1 class="h4" slot="title">Angular CAR RENT</h1>
+    <p class="h6" slot="description">Pick amount of days and pick the car you would love to drive</p>
+  </base-hero>
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-12 d-flex gap-4 flex-column">
+        <div class="row d-flex justify-content-center p-2">
+          <div class="col-auto d-flex flex-row align-items-center gap-2">
+            <p class="text-nowrap">Days:</p>
+            <input (ngModelChange)="onSetRentalDays($event)" [ngModel]="daysAmount" class="form-control form-control-sm"
+                   id="days_amount" max="100"
+                   min="1"
+                   minlength="1"
+                   name="days_amount"
+                   placeholder="" required
+                   step="1" type="number">
+          </div>
 
         </div>
+        <div class="row gap-2 justify-content-center">
 
-      </div>
-      <!--      <div class="row justify-content-center" [hidden]="rentalCalculator.pickedRentalID">-->
-      <!--        <div class="w-75 alert alert-dark" role="alert">-->
-      <!--          <strong>Now pick a car</strong>-->
-      <!--        </div>-->
-      <!--      </div>-->
-
-      <div class="row gap-2 justify-content-center">
-
-        <rental-card (addVehicleToRent)="onAddCarToRent(vehicle)" *ngFor="let vehicle of vehicles, index as i"
-                     [vehicle]="vehicle"
-                     [index]="i"
-                     [pickedVehicleId]="rentalCalculator.pickedRentalID"
-                     [disabledBtn]="!rentalCalculator.rentalDays"
-                     [dailyPrice]="getDailyPriceWithCurrency(vehicle?.class)"
-                     class="col-6 col-md-4 col-lg-3"
-        ></rental-card>
-      </div>
-
-      <div class="row justify-content-end border-dark border-1 border-top p-2 text-end">
-        <div class="col-12">
-          <h6>Rental price: <strong>{{rentalCalculator.rentalPrice}} {{pricingService.currency}}</strong> (
-            for {{rentalCalculator.rentalDays}} days)
-          </h6>
+          <rental-card (addVehicleToRent)="onAddCarToRent(vehicle)" *ngFor="let vehicle of vehicles, index as i"
+                       [dailyPrice]="getDailyPriceWithCurrency(vehicle?.class)"
+                       [disabledBtn]="!rentalCalculator.rentalDays"
+                       [index]="i"
+                       [pickedVehicleId]="rentalCalculator.pickedRentalID"
+                       [vehicle]="vehicle"
+                       class="col-6 col-md-4 col-lg-3"
+          ></rental-card>
         </div>
-        <div class="col-12 mt-4">
-          <button (click)="onCheckoutClick()"
-                  [disabled]="!rentalCalculator.rentalDays && rentalCalculator.rentalPrice ===0"
-                  class="btn btn-sm btn-success">Check out
-          </button>
+
+        <div class="row justify-content-end border-dark border-1 border-top p-2 text-end">
+          <div class="col-12">
+            <h6>Rental price: <strong>{{rentalCalculator.rentalPrice}} {{pricingService.currency}}</strong> (
+              for {{rentalCalculator.rentalDays}} days)
+            </h6>
+          </div>
+          <div class="col-12 mt-4">
+            <button (click)="onCheckoutClick()"
+                    [disabled]="!rentalCalculator.rentalDays && rentalCalculator.rentalPrice ===0"
+                    class="btn btn-sm btn-success">Check out
+            </button>
+          </div>
         </div>
       </div>
     </div>
