@@ -11,6 +11,7 @@ import {CategoriesComponent} from './components/rental/categories/categories.com
 
 // directives
 import {DefinitionDirective} from './directives/definition.directive';
+import {CheckoutComponent} from './components/rental/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,8 @@ import {DefinitionDirective} from './directives/definition.directive';
     DefinitionDirective,
     // directives
     CategoriesComponent,
+    CheckoutComponent,
+    SummaryComponent,
   ],
   imports: [
     BrowserModule,

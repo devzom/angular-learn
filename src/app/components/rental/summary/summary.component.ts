@@ -1,16 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
-  selector: 'app-summary',
+  selector: 'rental-summary',
   templateUrl: './summary.component.html',
   styles: []
 })
-export class SummaryComponent implements OnInit {
+export class SummaryComponent {
+  @Input() price: number = 0
+  @Input() days: number = 0
 
   constructor() {
-  }
-
-  ngOnInit(): void {
   }
 
 }

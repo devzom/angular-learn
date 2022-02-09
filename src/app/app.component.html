@@ -49,17 +49,13 @@
         </div>
 
         <div class="row justify-content-end border-dark border-1 border-top p-2 text-end">
-          <div class="col-12">
-            <h6>Rental price: <strong>{{rentalCalculator.rentalPrice | currency:'USD':'symbol':'1.2-2'}}</strong> (
-              for {{rentalCalculator.rentalDays}} days)
-            </h6>
-          </div>
-          <div class="col-12 mt-4">
-            <button (click)="onCheckoutClick()"
-                    [disabled]="!rentalCalculator.rentalDays && rentalCalculator.rentalPrice ===0"
-                    class="btn btn-sm btn-success">Check out
-            </button>
-          </div>
+          <rental-summary [days]="rentalCalculator.rentalDays"
+                          [price]="rentalCalculator.rentalPrice"
+          ></rental-summary>
+          <rental-checkout
+            (onCheckoutClick)="onCheckoutClick()"
+            [isDisabled]="!rentalCalculator.rentalDays && rentalCalculator.rentalPrice == 0"
+          ></rental-checkout>
         </div>
       </div>
     </div>
