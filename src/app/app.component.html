@@ -37,7 +37,6 @@
 
         </div>
         <div class="row gap-2 justify-content-center">
-
           <rental-card (addVehicleToRent)="onAddCarToRent(vehicle)" *ngFor="let vehicle of vehicles, index as i"
                        [dailyPrice]="getDailyPriceWithCurrency(vehicle?.class)"
                        [disabledBtn]="!rentalCalculator.rentalDays"
@@ -50,7 +49,7 @@
 
         <div class="row justify-content-end border-dark border-1 border-top p-2 text-end">
           <div class="col-12">
-            <h6>Rental price: <strong>{{rentalCalculator.rentalPrice}} {{pricingService.currency}}</strong> (
+            <h6>Rental price: <strong>{{rentalCalculator.rentalPrice | currency}}</strong> (
               for {{rentalCalculator.rentalDays}} days)
             </h6>
           </div>

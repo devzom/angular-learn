@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(() => {
       this.isLoading = false
-    }, 500)
+    }, 350)
   }
 
   @NgModule({
@@ -54,7 +54,7 @@ export class AppComponent implements OnInit {
   }
 
   getDailyPriceWithCurrency(vehicleClass: any) {
-    return `${this.pricingService.getByClass(vehicleClass)} ${this.pricingService.currency}`
+    return this.pricingService.getByClass(vehicleClass)
   }
 
   testLog(msg: any = 'test log') {

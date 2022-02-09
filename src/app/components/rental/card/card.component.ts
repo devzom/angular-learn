@@ -17,11 +17,11 @@ export class CardComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log('Init vehicle card: ', {
-      vehicle: this.vehicle,
-      index: this.index,
-      dailyPrice: this.dailyPrice
-    })
+    // console.log('Init vehicle card: ', {
+    //   vehicle: this.vehicle,
+    //   index: this.index,
+    //   dailyPrice: this.dailyPrice
+    // })
   }
 
 

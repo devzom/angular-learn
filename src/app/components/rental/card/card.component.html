@@ -6,7 +6,7 @@
     <p class="h6">{{vehicle?.make}} {{vehicle?.model}}</p>
     <p class="m-0">Year: {{vehicle?.year}} | Class: {{vehicle?.class}}</p>
     <div *ngIf="dailyPrice">
-      <p class="mt-0">Day rental price: {{dailyPrice}}</p>
+      <p class="mt-0">Day rental price: {{dailyPrice | currency}}</p>
     </div>
     <small>Offer ID: {{vehicle.id}}</small>
   </div>
