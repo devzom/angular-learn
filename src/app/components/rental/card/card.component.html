@@ -11,7 +11,12 @@
     </div>
     <small>Offer ID: {{vehicle.id}}</small>
   </div>
-  <div class="card-footer text-center">
-    <base-button [disabled]="disabledBtn" (click)="!disabledBtn? onRentalButtonClick(vehicle): ''">Pick</base-button>
+  <div class="card-footer bg-transparent border-0">
+    <base-button
+      (click)="!disabledBtn? onRentalButtonClick(vehicle): ''"
+      [disabled]="disabledBtn"
+      [full]="true">
+      Pick
+    </base-button>
   </div>
 </div>
