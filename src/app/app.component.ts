@@ -65,17 +65,17 @@ export class AppComponent implements OnInit {
         vehicleId: this.rentalCalculator.pickedRentalID
       })
 
+
       setTimeout(() => {
+        this.isCheckoutFinishedAndSucceed = true;
+        this.isCheckoutProcessing = false
 
-        setTimeout(() => {
-          this.isCheckoutFinishedAndSucceed = true;
-          this.isCheckoutProcessing = false
-
-          this.vehicles = this.rentalListService.getAvailableVehicles()
-          this.rentalCalculator.resetData()
-        }, 150)
+        this.vehicles = this.rentalListService.getAvailableVehicles()
+        this.rentalCalculator.resetData()
+      }, 150)
 
 
+      setTimeout(() => {
         this.isCheckoutFinishedAndSucceed = false;
       }, 2000)
 
