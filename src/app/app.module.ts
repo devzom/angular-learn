@@ -29,7 +29,7 @@ import {CheckoutComponent} from './components/rental/checkout/checkout.component
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -36,10 +36,15 @@
           </div>
 
         </div>
-        <div class="row gap-2 justify-content-center">
+        <div class="row gap-2">
+          <div class="col-12 h6">
+            Available cars: {{vehicles.length}}
+          </div>
+        </div>
+        <div class="row gap-2">
+
           <rental-card (addVehicleToRent)="onAddCarToRent(vehicle)"
                        *ngFor="let vehicle of vehicles, index as i"
-                       [dailyPrice]="getDailyPriceWithCurrency(vehicle.class)"
                        [disabledBtn]="!rentalCalculator.rentalDays"
                        [index]="i"
                        [pickedVehicleId]="rentalCalculator.pickedRentalID"
@@ -48,14 +53,19 @@
           ></rental-card>
         </div>
 
-        <div class="row justify-content-end border-dark border-1 border-top p-2 text-end">
+        <div class="row border-dark border-1 border-top p-2 text-end">
           <rental-summary [days]="rentalCalculator.rentalDays"
                           [price]="rentalCalculator.rentalPrice"
           ></rental-summary>
           <rental-checkout
             (onCheckoutClick)="onCheckoutClick()"
             [isDisabled]="isCheckoutDisabled()"
+            [isLoading]="isCheckoutProcessing"
           ></rental-checkout>
+
+          <div *ngIf="isCheckoutFinishedAndSucceed" class="alert alert-success my-3 h-5" role="alert">
+            Checkout finished, the car is waiting to pick up.
+          </div>
         </div>
       </div>
     </div>

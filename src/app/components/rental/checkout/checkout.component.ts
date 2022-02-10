@@ -7,9 +7,11 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class CheckoutComponent implements OnInit {
   @Input() isDisabled: boolean = true
+  @Input() isLoading: boolean = false
 
   // outputs
   @Output() onCheckoutClick = new EventEmitter()
+
 
   constructor() {
   }

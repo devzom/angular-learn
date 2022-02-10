@@ -1,6 +1,4 @@
 import {Injectable} from '@angular/core';
-
-import {RentalListService} from "./rental-list.service";
 import {RentalPricingService} from "./rental-pricing.service";
 
 @Injectable({
@@ -9,10 +7,9 @@ import {RentalPricingService} from "./rental-pricing.service";
 
 export class RentalCalculatorService {
 
-  constructor(public rentalListService: RentalListService, public rentalPricingService: RentalPricingService) {
+  constructor(public rentalPricingService: RentalPricingService) {
   }
 
-  vehicles = this.rentalListService.vehiclesList
   private price = 0
   private rentalDaysAmount: number = 0
   private pickedCar: IVehicle | any;
@@ -36,23 +33,28 @@ export class RentalCalculatorService {
   calculatePrice(
     days = this.rentalDaysAmount, vehicleClass = this.pickedCar?.class || null
   ) {
-    console.log('Calculate price', {days: this.rentalDaysAmount, vehicleClass})
+    // console.log('Calculate price', {days: this.rentalDaysAmount, vehicleClass})
     return days * this.rentalPricingService.getByClass(vehicleClass)
   }
 
   rent(car: IVehicle): void {
     this.pickedCar = car
-
     this.price = this.calculatePrice()
   }
 
   setDays(amount: number) {
     if (!!amount) {
-      console.log('Set days: ', amount)
+      // console.log('Set days: ', amount)
       this.rentalDaysAmount = amount
-
       if (this.pickedCar) this.price = this.calculatePrice()
     }
+  }
+
+
+  resetData() {
+    this.rentalDaysAmount = 0
+    this.price = 0
+    this.pickedCar = null
   }
 
 }

@@ -1,19 +1,27 @@
 import {Injectable} from '@angular/core';
-import {RentalPricingService} from "./rental-pricing.service";
+import {RentalListService} from "./rental-list.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class RentalCheckoutService {
 
-  constructor(private pricingService: RentalPricingService) {
-  }
-
-  checkout(checkoutData: any) {
-    this.alertCheckout({...checkoutData, currency: this.pricingService.currency})
+  constructor(private rentalListService: RentalListService) {
   }
 
   alertCheckout(message: any) {
-    alert(JSON.stringify(message))
+    const msg = `Do You accept the order ${JSON.stringify(message)}? `
+    return confirm(msg)
+  }
+
+  checkout(checkoutData: any) {
+    let checkoutResponse = this.alertCheckout({...checkoutData})
+    if (!checkoutResponse) {
+      alert('You have canceled the checkout')
+    } else {
+      this.rentalListService.setVehicleUnavailable(checkoutData?.vehicleId)
+    }
+
+    return checkoutResponse
   }
 }

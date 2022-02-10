@@ -1,8 +1,13 @@
 <div class="col-12 mt-2">
   <button
     (click)="checkOutClick()"
-    [disabled]="isDisabled"
+    [disabled]="isDisabled || isLoading"
     class="btn btn-sm btn-success"
-    id="checkout-button">Check out
+    id="checkout-button">
+    <span *ngIf="!isLoading; else loading">Check out</span>
+    <ng-template #loading>
+      <span class="d-inline-block">Processing... </span>
+      <div aria-hidden="true" class="d-inline-block spinner-border spinner-border-sm" role="status"></div>
+    </ng-template>
   </button>
 </div>

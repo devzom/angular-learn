@@ -5,7 +5,7 @@ import {Component, Input} from '@angular/core';
   template: `
     <button [disabled]="disabled"
             [ngClass]="{'w-100 mx-auto': full}"
-            disabled class="btn btn-sm  btn-dark m-2">
+            disabled class="btn btn-sm btn-dark">
       <ng-content></ng-content>
     </button>
   `,
