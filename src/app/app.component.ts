@@ -1,10 +1,13 @@
 import {Component, Input, NgModule, OnInit} from '@angular/core';
 import {Title} from "@angular/platform-browser";
 
+/* Services*/
 import {RentalCalculatorService} from "./services/rental-calculator.service";
 import {RentalCheckoutService} from "./services/rental-checkout.service";
 import {DefinitionDirective} from "./directives/definition.directive";
 import {RentalListService} from "./services/rental-list.service";
+import {VehiclesService} from "./services/vehicles.service";
+
 
 @Component({
   selector: 'app-root',
@@ -19,28 +22,34 @@ export class AppComponent implements OnInit {
   })
 
   vehicles: IVehicle[] = []
-
   isLoading: boolean = true
   isCheckoutProcessing = false
   isCheckoutFinishedAndSucceed: boolean = false;
 
   daysAmount = this.rentalCalculator.rentalDays
-
-  ngOnInit() {
-
-    setTimeout(() => {
-      this.vehicles = this.rentalListService.fetchVehicles()
-      this.isLoading = false
-    }, 350)
-  }
+  vehiclesTest$: any;
 
   constructor(public rentalCalculator: RentalCalculatorService,
               public checkoutService: RentalCheckoutService,
               private titleService: Title,
-              public rentalListService: RentalListService
+              public rentalListService: RentalListService,
+              private carsService: VehiclesService
   ) {
     titleService.setTitle('Car rental')
   }
+
+  ngOnInit() {
+    setTimeout(() => {
+      this.vehicles = this.rentalListService.fetchVehicles()
+      this.isLoading = false
+    }, 350)
+
+  }
+
+  fetchCarsMakeAPI() {
+    this.vehiclesTest$ = this.carsService.getCarsMake()
+  }
+
 
   onAddCarToRent(car: IVehicle) {
     this.rentalCalculator.rent(car)

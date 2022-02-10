@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  rapidApiKey: '053738b538mshbf3f49b60d2422dp1fdf03jsn0fa6c0d971bb',
+  baseVehiclesUrl: 'https://car-data.p.rapidapi.com/cars'
 };
 
 /*
