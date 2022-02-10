@@ -1,3 +1,8 @@
+<base-hero
+>
+  <h1 class="h4 mt-5" slot="title">Angular CAR RENT</h1>
+</base-hero>
+
 <div *ngIf="isLoading" class="d-flex flex-grow-1 flex-row justify-content-center align-items-center">
   <base-hero
   >
@@ -15,58 +20,54 @@
 </div>
 
 <div *ngIf="vehicles.length && !isLoading">
-  <base-hero
-  >
-    <h1 class="h4" slot="title">Angular CAR RENT</h1>
-    <p class="h6" slot="description">Pick amount of days and pick the car you would love to drive</p>
-  </base-hero>
   <div class="container mt-4">
-    <div class="row">
-      <div class="col-12 d-flex gap-4 flex-column">
-        <div class="row d-flex justify-content-center p-2">
-          <div class="col-auto d-flex flex-row align-items-center gap-2">
-            <p class="text-nowrap">Days:</p>
-            <input (ngModelChange)="rentalCalculator.setDays($event)" [ngModel]="daysAmount"
-                   class="form-control form-control-sm"
-                   id="days_amount" max="100"
-                   min="1"
-                   minlength="1"
-                   name="days_amount"
-                   placeholder="" required
-                   step="1" type="number">
-          </div>
-
+    <div class="col-12 d-flex gap-4 flex-column">
+      <div class="row d-flex justify-content-center p-2 gap-3">
+        <div class="col-12 text-center">
+          <p class="h6">Pick amount of days and pick the car you would love to drive</p>
         </div>
-        <div class="row gap-2">
-          <div class="col-12 h6">
-            Available cars: {{vehicles.length}}
-          </div>
-        </div>
-        <div class="row gap-2">
-
-          <rental-card (addVehicleToRent)="onAddCarToRent(vehicle)"
-                       *ngFor="let vehicle of vehicles, index as i"
-                       [disabledBtn]="!rentalCalculator.rentalDays"
-                       [index]="i"
-                       [pickedVehicleId]="rentalCalculator.pickedRentalID"
-                       [vehicle]="vehicle"
-                       class="col-6 col-md-4 col-lg-3"
-          ></rental-card>
+        <div class="col-auto d-flex flex-row align-items-center gap-2">
+          <p class="text-nowrap">Days:</p>
+          <input (ngModelChange)="rentalCalculator.setDays($event)" [ngModel]="daysAmount"
+                 class="form-control form-control-sm"
+                 id="days_amount" max="100"
+                 min="1"
+                 minlength="1"
+                 name="days_amount"
+                 placeholder="" required
+                 step="1" type="number">
         </div>
 
-        <div class="row border-dark border-1 border-top p-2 text-end">
-          <rental-summary [days]="rentalCalculator.rentalDays"
-                          [price]="rentalCalculator.rentalPrice"
-          ></rental-summary>
-          <rental-checkout
-            (onCheckoutClick)="onCheckoutClick()"
-            [isDisabled]="isCheckoutDisabled()"
-            [isLoading]="isCheckoutProcessing"
-          ></rental-checkout>
+      </div>
+      <div class="row gap-2">
+        <div class="col-12 h6">
+          Available cars: {{vehicles.length}}
+        </div>
+      </div>
+      <div class="row gap-2">
 
-          <div *ngIf="isCheckoutFinishedAndSucceed" class="alert alert-success my-3 h-5" role="alert">
-            Checkout finished, the car is waiting to pick up.
-          </div>
+        <rental-card (addVehicleToRent)="onAddCarToRent(vehicle)"
+                     *ngFor="let vehicle of vehicles, index as i"
+                     [disabledBtn]="!rentalCalculator.rentalDays"
+                     [index]="i"
+                     [pickedVehicleId]="rentalCalculator.pickedRentalID"
+                     [vehicle]="vehicle"
+                     class="col-6 col-md-4 col-lg-3"
+        ></rental-card>
+      </div>
+
+      <div class="row border-dark border-1 border-top p-2 text-end">
+        <rental-summary [days]="rentalCalculator.rentalDays"
+                        [price]="rentalCalculator.rentalPrice"
+        ></rental-summary>
+        <rental-checkout
+          (onCheckoutClick)="onCheckoutClick()"
+          [isDisabled]="isCheckoutDisabled()"
+          [isLoading]="isCheckoutProcessing"
+        ></rental-checkout>
+
+        <div *ngIf="isCheckoutFinishedAndSucceed" class="alert alert-success my-3 h-5" role="alert">
+          Checkout finished, the car is waiting to pick up.
         </div>
       </div>
     </div>
