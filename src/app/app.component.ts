@@ -7,6 +7,7 @@ import {RentalCheckoutService} from "./services/rental-checkout.service";
 import {DefinitionDirective} from "./directives/definition.directive";
 import {RentalListService} from "./services/rental-list.service";
 import {VehiclesService} from "./services/vehicles.service";
+import {RentalPricingService} from "./services/rental-pricing.service";
 
 
 @Component({
@@ -31,6 +32,7 @@ export class AppComponent implements OnInit {
 
   constructor(public rentalCalculator: RentalCalculatorService,
               public checkoutService: RentalCheckoutService,
+              public pricingService: RentalPricingService,
               private titleService: Title,
               public rentalListService: RentalListService,
               private carsService: VehiclesService
@@ -80,6 +82,10 @@ export class AppComponent implements OnInit {
       }, 2000)
 
     }, 450)
+  }
+
+  getDailyPriceWithCurrency(vehicleClass: any) {
+    return this.pricingService.getByClass(vehicleClass)
   }
 
   isCheckoutDisabled() {

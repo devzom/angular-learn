@@ -46,6 +46,7 @@
             <div class="row mt-4">
               <rental-card (addVehicleToRent)="onAddCarToRent(vehicle)"
                            *ngFor="let vehicle of vehicles, index as i"
+                           [dailyPrice]="getDailyPriceWithCurrency(vehicle.class)"
                            [index]="i"
                            [pickedVehicleId]="rentalCalculator.pickedRentalID"
                            [vehicle]="vehicle"
