@@ -33,7 +33,6 @@ export class RentalCalculatorService {
   calculatePrice(
     days = this.rentalDaysAmount, vehicleClass = this.pickedCar?.class || null
   ) {
-    // console.log('Calculate price', {days: this.rentalDaysAmount, vehicleClass})
     return days * this.rentalPricingService.getByClass(vehicleClass)
   }
 
@@ -44,7 +43,6 @@ export class RentalCalculatorService {
 
   setDays(amount: number) {
     if (!!amount) {
-      // console.log('Set days: ', amount)
       this.rentalDaysAmount = amount
       if (this.pickedCar) this.price = this.calculatePrice()
     }

@@ -26,7 +26,8 @@
         <div class="row d-flex justify-content-center p-2">
           <div class="col-auto d-flex flex-row align-items-center gap-2">
             <p class="text-nowrap">Days:</p>
-            <input (ngModelChange)="onSetRentalDays($event)" [ngModel]="daysAmount" class="form-control form-control-sm"
+            <input (ngModelChange)="rentalCalculator.setDays($event)" [ngModel]="daysAmount"
+                   class="form-control form-control-sm"
                    id="days_amount" max="100"
                    min="1"
                    minlength="1"
