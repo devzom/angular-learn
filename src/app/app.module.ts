@@ -3,7 +3,6 @@ import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {HttpClientModule} from "@angular/common/http";
 
-
 import {AppComponent} from './app.component';
 import {HeroComponent} from './components/base/hero/hero.component';
 import {ButtonComponent} from './components/base/button/button.component';
@@ -14,6 +13,8 @@ import {CategoriesComponent} from './components/rental/categories/categories.com
 // directives
 import {DefinitionDirective} from './directives/definition.directive';
 import {CheckoutComponent} from './components/rental/checkout/checkout.component';
+import {AppRoutingModule} from "./app.routing.module";
+
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {CheckoutComponent} from './components/rental/checkout/checkout.component
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
