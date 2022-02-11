@@ -14,6 +14,9 @@ import {CategoriesComponent} from './components/rental/categories/categories.com
 import {DefinitionDirective} from './directives/definition.directive';
 import {CheckoutComponent} from './components/rental/checkout/checkout.component';
 import {AppRoutingModule} from "./app.routing.module";
+import {RentalDetailsComponent} from './views/rental-details/rental-details.component';
+import {HeaderComponent} from './components/header/header.component';
+import {FooterComponent} from './components/footer/footer.component';
 
 
 @NgModule({
@@ -29,6 +32,9 @@ import {AppRoutingModule} from "./app.routing.module";
     CategoriesComponent,
     CheckoutComponent,
     SummaryComponent,
+    RentalDetailsComponent,
+    HeaderComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

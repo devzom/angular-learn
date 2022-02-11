@@ -7,6 +7,32 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-body {
+  flex-grow: 1
+}
+
+.full-height {
+  height: 100%;
+}
+
 h1,
 h2,
 h3,

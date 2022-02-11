@@ -1,26 +1,26 @@
-<base-hero
->
-  <h1 class="h4 mt-5" slot="title">Angular CAR RENT</h1>
-</base-hero>
+<app-header></app-header>
 
-<div *ngIf="isLoading" class="d-flex flex-grow-1 flex-row justify-content-center align-items-center">
-  <base-hero
-  >
-    <h1 class="h4 py-5" slot="title">Loading...</h1>
-  </base-hero>
-</div>
 
-<div *ngIf="!vehicles.length && !isLoading"
-     class="d-flex flex-grow-1 flex-row justify-content-center align-items-center">
-  <base-hero
-  >
-    <h1 class="h4 py-5" slot="title">No data provided</h1>
-    <p>Check provided vehicle list</p>
-  </base-hero>
-</div>
+<div class="app-body py-4">
 
-<div *ngIf="vehicles.length && !isLoading">
-  <div class="container mt-4 d-flex flex-column gap-2">
+
+  <div *ngIf="isLoading" class="d-flex flex-grow-1 flex-row justify-content-center align-items-center">
+    <base-hero
+    >
+      <h1 class="h4 py-5" slot="title">Loading...</h1>
+    </base-hero>
+  </div>
+
+  <div *ngIf="!vehicles.length && !isLoading"
+       class="d-flex flex-grow-1 flex-row justify-content-center align-items-center">
+    <base-hero
+    >
+      <h1 class="h4 py-5" slot="title">No data provided</h1>
+      <p>Check provided vehicle list</p>
+    </base-hero>
+  </div>
+
+  <div *ngIf="vehicles.length && !isLoading" class="container mt-4 pt-5 d-flex flex-column gap-2">
     <div class="row">
       <aside class="col-2" style="padding-top: 10%;">
         <button (click)="fetchCarsMakeAPI()" class="btn btn-sm btn-danger text-sm-center">Fetch cars makes</button>
@@ -89,3 +89,5 @@
     </div>
   </div>
 </div>
+
+<app-footer></app-footer>
