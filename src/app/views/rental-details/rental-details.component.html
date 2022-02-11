@@ -1,1 +1,16 @@
-<p>rental-details works!</p>
+<base-hero
+>
+  <h1 class="h4" slot="title">Vehicle details: {{id}}</h1>
+</base-hero>
+
+
+<div class="row my-5">
+  <div *ngIf="details$">
+    {{details$|json}}
+  </div>
+
+  <div *ngIf="details">
+    {{details|json}}
+  </div>
+
+</div>

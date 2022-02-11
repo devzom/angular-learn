@@ -9,7 +9,7 @@ export class RentalListService {
   constructor() {
   }
 
-  vehicles: IVehicle[] = []
+  vehicles: IVehicle[] = vehiclesMock
   availableVehicles: IVehicle[] = []
 
   fetchVehicles() {
@@ -20,6 +20,16 @@ export class RentalListService {
   getVehiclesList() {
     return this.vehicles
   }
+
+
+  getVehicleById(id: any) {
+    if (Number(id)) {
+      return this.vehicles.filter(vehicle => vehicle.id == id)[0]
+    }
+
+    return null
+  }
+
 
   getAvailableVehicles() {
     return this.availableVehicles

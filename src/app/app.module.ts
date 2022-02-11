@@ -17,6 +17,9 @@ import {AppRoutingModule} from "./app.routing.module";
 import {RentalDetailsComponent} from './views/rental-details/rental-details.component';
 import {HeaderComponent} from './components/header/header.component';
 import {FooterComponent} from './components/footer/footer.component';
+import {RentalListingComponent} from './views/rental-listing/rental-listing.component';
+import {PageNotFoundComponent} from './views/page-not-found/page-not-found.component';
+import {RentalHomeComponent} from './views/rental-home/rental-home.component';
 
 
 @NgModule({
@@ -35,6 +38,9 @@ import {FooterComponent} from './components/footer/footer.component';
     RentalDetailsComponent,
     HeaderComponent,
     FooterComponent,
+    RentalListingComponent,
+    PageNotFoundComponent,
+    RentalHomeComponent,
   ],
   imports: [
     BrowserModule,

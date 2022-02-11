@@ -8,7 +8,10 @@
     <div *ngIf="dailyPrice">
       <p class="mt-0">Day rental price: {{dailyPrice | currency}}</p>
     </div>
-    <small>Offer ID: {{vehicle.id}}</small>
+    <small class="d-block">Offer ID: {{vehicle.id}}</small>
+    <small class="d-block">
+      <a [routerLink]="['/vehicles', vehicle.id]" class="d-block">Check details</a>
+    </small>
   </div>
   <div class="card-footer bg-transparent border-0">
     <base-button
