@@ -20,6 +20,7 @@ import {FooterComponent} from './components/footer/footer.component';
 import {RentalListingComponent} from './views/rental-listing/rental-listing.component';
 import {PageNotFoundComponent} from './views/page-not-found/page-not-found.component';
 import {RentalHomeComponent} from './views/rental-home/rental-home.component';
+import {FiltersComponent} from './components/rental/filters/filters.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import {RentalHomeComponent} from './views/rental-home/rental-home.component';
     RentalListingComponent,
     PageNotFoundComponent,
     RentalHomeComponent,
+    FiltersComponent,
   ],
   imports: [
     BrowserModule,

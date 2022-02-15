@@ -1,11 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-categories',
+  selector: 'rental-categories',
   templateUrl: './categories.component.html',
   styles: []
 })
 export class CategoriesComponent implements OnInit {
+  @Input() makes$ = [];
 
   constructor() {
   }

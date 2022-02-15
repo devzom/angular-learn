@@ -1,6 +1,6 @@
 <base-hero
 >
-  <h1 class="h4" slot="title">Car rental list</h1>
+  <h1 class="h2" slot="title">Car rental list</h1>
 </base-hero>
 
 
@@ -22,28 +22,37 @@
 
 <div *ngIf="vehicles.length && !isLoading">
   <div class="row">
-    <aside class="col-2" style="padding-top: 10%;">
-      <button (click)="fetchCarsMakeAPI()" class="btn btn-sm btn-danger text-sm-center">Fetch cars makes</button>
-      <div *ngIf="vehiclesTest$"
-      >
-        <h6>Car makes:</h6>
-        <div *ngFor="let item of vehiclesTest$ | async" class="form-check">
-          <input [id]="item + '-type'" class="form-check-input" name="vehicleMake" type="radio">
-          <label [for]="item + '-type'" class="form-check-label">
-            {{item}}
-          </label>
-        </div>
-      </div>
+    <aside class="col-2">
+      <!--      <button (click)="fetchCarsMakeAPI()" class="btn btn-sm btn-outline-dark text-sm-center">Fetch cars makes</button>-->
+      <!--      <rental-categories [makes$]="vehiclesMakes$"></rental-categories>-->
+
+      <!--      <div *ngIf="vehiclesMakes$" class="mt-4">-->
+      <!--        <h6>Car makes:</h6>-->
+      <!--        <div *ngFor="let item of vehiclesMakes$ | async" class="form-check">-->
+      <!--          <input [id]="item + '-type'" class="form-check-input" name="vehicleMake" type="radio">-->
+      <!--          <label [for]="item + '-type'" class="form-check-label">-->
+      <!--            {{item}}-->
+      <!--          </label>-->
+      <!--        </div>-->
+      <!--      </div>-->
+
+      <section id="rental-filters">
+        <p class="h5 border-bottom border-1 border-dark py-2">Filters</p>
+        <rental-filters (setFilter)="onSetListingFilter($event)" [filters]="['All', 'A', 'B', 'C']" param="class"
+                        title="Car class"></rental-filters>
+
+        <!--        <rental-filters (setFilter)="onSetListingFilter($event)" title="Price sort" param="sort"-->
+        <!--                        [filters]="['ascending','descending']"></rental-filters>-->
+      </section>
     </aside>
 
     <article class="col-10">
       <div class="row gap-2">
         <div class="col-12">
-          <p class="h6 pb-4">Pick the car you would love to drive and amount of days to rent</p>
+          <p class="h6 pb-2">Pick the car you would love to drive and amount of days to rent</p>
           <p class="h6">Available cars: {{vehicles.length}}</p>
 
-
-          <div class="row mt-4">
+          <section class="row mt-2">
             <rental-card (addVehicleToRent)="onAddCarToRent(vehicle)"
                          *ngFor="let vehicle of vehicles, index as i"
                          [dailyPrice]="getDailyPriceWithCurrency(vehicle.class)"
@@ -52,9 +61,9 @@
                          [vehicle]="vehicle"
                          class="col-12 col-md-5 col-lg-3"
             ></rental-card>
-          </div>
+          </section>
 
-          <div class="row d-flex justify-content-end mt-5">
+          <section class="row d-flex justify-content-end mt-5">
             <div class="col-auto d-flex flex-row align-items-end justify-content-end gap-2">
               <p class="text-nowrap">Rental days:</p>
               <input (ngModelChange)="rentalCalculator.setDays($event)"
@@ -68,9 +77,9 @@
                      placeholder="" required
                      step="1" type="number">
             </div>
-          </div>
+          </section>
 
-          <div class="mt-3 p-2 text-end">
+          <section class="mt-3 p-2 text-end">
             <rental-summary [days]="rentalCalculator.rentalDays"
                             [price]="rentalCalculator.rentalPrice"
             ></rental-summary>
@@ -83,7 +92,7 @@
             <div *ngIf="isCheckoutFinishedAndSucceed" class="alert alert-success my-3 h-5" role="alert">
               Checkout finished, the car is waiting to pick up.
             </div>
-          </div>
+          </section>
         </div>
       </div>
     </article>

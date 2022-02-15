@@ -1,16 +1,9 @@
-<div class="row">
-  <div class="col-12">
-    <div class="form-check">
-      <input class="form-check-input" id="flexRadioDefault1" name="flexRadioDefault" type="radio">
-      <label class="form-check-label" for="flexRadioDefault1">
-        Default radio
-      </label>
-    </div>
-    <div class="form-check">
-      <input checked class="form-check-input" id="flexRadioDefault2" name="flexRadioDefault" type="radio">
-      <label class="form-check-label" for="flexRadioDefault2">
-        Default checked radio
-      </label>
-    </div>
+<div class="mt-3">
+  <h6>Car makes:</h6>
+  <div *ngFor="let make of makes$" class="form-check">
+    <input [id]="make + '-type'" class="form-check-input" name="vehicleMake" type="radio">
+    <label [for]="make + '-type'" class="form-check-label">
+      {{make}}
+    </label>
   </div>
 </div>

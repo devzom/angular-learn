@@ -25,9 +25,8 @@ export class CardComponent implements OnInit {
   }
 
 
+  // send signal to parent component
   onRentalButtonClick(vehicle: IVehicle) {
-    // send signal to parent component
-    // console.log('Emit vehicle from card comp: ', vehicle)
     this.addVehicleToRent.emit(vehicle)
   }
 

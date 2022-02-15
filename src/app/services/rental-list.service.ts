@@ -13,14 +13,9 @@ export class RentalListService {
   availableVehicles: IVehicle[] = []
 
   fetchVehicles() {
-    this.availableVehicles = vehiclesMock
+    this.availableVehicles = this.vehicles
     return this.availableVehicles
   }
-
-  getVehiclesList() {
-    return this.vehicles
-  }
-
 
   getVehicleById(id: any) {
     if (Number(id)) {

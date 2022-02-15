@@ -1,0 +1,14 @@
+<div>
+  <strong class="d-block py-2">{{title}}:</strong>
+  <div *ngFor="let filter of filters" class="form-check">
+    <input (change)="handleRadioChange($event)"
+           [name]="'filterName-'+ param"
+           [value]="filter"
+           class="form-check-input"
+           type="radio"
+    >
+    <label [for]="filter + '-' + param" class="form-check-label">
+      {{filter | titlecase}}
+    </label>
+  </div>
+</div>
