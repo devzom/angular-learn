@@ -15,7 +15,7 @@
   <base-hero
   >
     <h1 class="h4 py-5" slot="title">No data provided</h1>
-    <p>Check provided vehicle list</p>
+    <p>Check provided car list</p>
   </base-hero>
 </div>
 
@@ -61,6 +61,7 @@
                          [index]="i"
                          [pickedVehicleId]="rentalCalculator.pickedRentalID"
                          [vehicle]="vehicle"
+                         allowPickAction="true"
                          class="col-12 col-md-5 col-lg-3"
             ></rental-card>
           </section>

@@ -12,6 +12,6 @@ import {Component, Input} from '@angular/core';
   styles: []
 })
 export class ButtonComponent {
-  @Input() disabled: boolean = true;
-  @Input() full: boolean = false;
+  @Input() disabled: boolean | string = true;
+  @Input() full: boolean | string = false;
 }

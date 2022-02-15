@@ -8,6 +8,7 @@ import {Component, EventEmitter, Input, Output, OnInit} from '@angular/core';
 export class CardComponent implements OnInit {
   @Input() vehicle!: IVehicle;
   @Input() disabledBtn: boolean = false;
+  @Input() allowPickAction: boolean | string = false;
   @Input() pickedVehicleId: any;
   @Input() dailyPrice: number = 0;
   @Input() index: any; // test

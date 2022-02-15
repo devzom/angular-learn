@@ -1,16 +1,15 @@
-<base-hero
->
-  <h1 class="h4" slot="title">Vehicle details: {{id}}</h1>
-</base-hero>
+<section>
+  <base-hero
+  >
+    <h1 class="h4" slot="title">Vehicle details: {{id}}</h1>
+  </base-hero>
+</section>
 
 
-<div class="row my-5">
-  <div *ngIf="details$">
-    {{details$|json}}
-  </div>
-
-  <div *ngIf="details">
-    {{details|json}}
-  </div>
-
-</div>
+<section class="row mt-2 d-flex justify-content-center">
+  <rental-card
+    [dailyPrice]="pricingService.getByGrade(details.grade)"
+    [vehicle]="details"
+    class="col-12 col-md-4"
+  ></rental-card>
+</section>
