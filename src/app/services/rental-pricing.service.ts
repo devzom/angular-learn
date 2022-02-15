@@ -17,9 +17,9 @@ export class RentalPricingService {
   constructor() {
   }
 
-  getByClass(_class: any) {
-    if (!_class) return 0
-    return this.pricing[_class]
+  getByGrade(grade: any) {
+    if (!grade) return 0
+    return this.pricing[grade]
   }
 
 }

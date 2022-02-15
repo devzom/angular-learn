@@ -160,8 +160,8 @@ export class RentalListingComponent implements OnInit {
     return vehicles
   }
 
-  getDailyPriceWithCurrency(vehicleClass: any) {
-    return this.pricingService.getByClass(vehicleClass)
+  getDailyPriceWithCurrency(vehicleGrade: any) {
+    return this.pricingService.getByGrade(vehicleGrade)
   }
 
   isCheckoutDisabled() {
