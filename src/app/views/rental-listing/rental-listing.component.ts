@@ -16,6 +16,7 @@ export class RentalListingComponent implements OnInit {
   @Input() car: any;
 
   vehicles: IVehicle[] = []
+  availableVehicles: IVehicle[] = []
 
   isLoading: boolean = true
   isCheckoutProcessing = false
@@ -37,16 +38,25 @@ export class RentalListingComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.availableVehicles = this.rentalListService.fetchVehicles()
+
+    this.route.queryParamMap.subscribe(queryParams => {
+      if (!!queryParams.keys.length) {
+        if (queryParams.has('grade')) {
+          const value = queryParams.get('grade')
+
+          // @ts-ignore
+          this.vehicles = this.filterVehicles({grade: value})
+        }
+
+      } else {
+        this.vehicles = this.availableVehicles
+      }
+    })
+
     setTimeout(() => {
-
-      // TODO use the query params to filter vehicles on page reload
-
-      this.vehicles = this.rentalListService.fetchVehicles()
-
-
       this.isLoading = false
     }, 350)
-
   }
 
   fetchCarsMakeAPI() {
@@ -86,22 +96,25 @@ export class RentalListingComponent implements OnInit {
 
 
   getCurrentQueryParams() {
-    let actualParams
+    let actualParams = {}
 
     this.route.queryParams.subscribe(queryParam => {
       actualParams = queryParam
     }).unsubscribe()
 
+    console.log({actualParams})
     return actualParams
   }
 
   async onSetListingFilter(event: any) {
-    let queryParams
-    let actualQueryParams = this.getCurrentQueryParams() || {}
+    let queryParams = {}
+    const actualQueryParams = this.getCurrentQueryParams() || {}
+
 
     const param = event.param
     const value = event.value.toLocaleLowerCase()
     const queryParam = {[param]: value}
+
 
     // reset filter if user pick option 'all' which reset the filter
     // @ts-ignore
@@ -121,20 +134,22 @@ export class RentalListingComponent implements OnInit {
       queryParams: queryParams
     });
 
-
     this.filterVehicles({param, value})
   }
 
-  filterVehicles(filter: { param: string, value: string }) {
-    const availableVehicles = this.rentalListService.fetchVehicles()
+  filterVehicles(filter: { [key: string]: string | number }) {
+    let vehicles: any[] = []
+    const filterKey = Object.keys(filter)[0]
+    const filterValue = filter[filterKey]
 
-    if (filter.value == 'all') {
-      this.vehicles = this.rentalListService.fetchVehicles()
+    if (filterValue == 'all') {
+      vehicles = this.availableVehicles
     } else {
       // @ts-ignore
-      this.vehicles = availableVehicles.filter(vehicle => vehicle[filter.param].toLocaleLowerCase() === filter.value)
+      vehicles = this.availableVehicles.filter(vehicle => vehicle[filterKey]?.toLowerCase() == filterValue)
     }
 
+    return vehicles
   }
 
   getDailyPriceWithCurrency(vehicleClass: any) {

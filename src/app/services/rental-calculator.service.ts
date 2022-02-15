@@ -31,7 +31,7 @@ export class RentalCalculatorService {
   }
 
   calculatePrice(
-    days = this.rentalDaysAmount, vehicleClass = this.pickedCar?.class || null
+    days = this.rentalDaysAmount, vehicleClass = this.pickedCar?.grade || null
   ) {
     return days * this.rentalPricingService.getByClass(vehicleClass)
   }

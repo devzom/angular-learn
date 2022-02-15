@@ -3,7 +3,7 @@ export default [{
   make: 'Volvo',
   model: "V60",
   year: 2021,
-  class: 'A',
+  grade: 'A',
   imageSrc: '/assets/images/volvo-v60.jpeg'
 },
   {
@@ -11,7 +11,7 @@ export default [{
     make: 'Volvo',
     model: "XC60",
     year: 2019,
-    class: 'B',
+    grade: 'B',
     imageSrc: '/assets/images/volvo-xc60.jpeg'
 
   },
@@ -20,6 +20,6 @@ export default [{
     make: 'Volvo',
     model: "V40",
     year: 2017,
-    class: 'C',
+    grade: 'C',
     imageSrc: '/assets/images/volvo-v40.jpeg'
   }]

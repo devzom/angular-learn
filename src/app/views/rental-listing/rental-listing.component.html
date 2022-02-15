@@ -26,7 +26,7 @@
       <!--      <button (click)="fetchCarsMakeAPI()" class="btn btn-sm btn-outline-dark text-sm-center">Fetch cars makes</button>-->
       <!--      <rental-categories [makes$]="vehiclesMakes$"></rental-categories>-->
 
-      <!--      <div *ngIf="vehiclesMakes$" class="mt-4">-->
+      <!--      <div *ngIf="§vehiclesMakes$" class="mt-4">-->
       <!--        <h6>Car makes:</h6>-->
       <!--        <div *ngFor="let item of vehiclesMakes$ | async" class="form-check">-->
       <!--          <input [id]="item + '-type'" class="form-check-input" name="vehicleMake" type="radio">-->
@@ -38,7 +38,7 @@
 
       <section id="rental-filters">
         <p class="h5 border-bottom border-1 border-dark py-2">Filters</p>
-        <rental-filters (setFilter)="onSetListingFilter($event)" [filters]="['All', 'A', 'B', 'C']" param="class"
+        <rental-filters (setFilter)="onSetListingFilter($event)" [filters]="['All', 'A', 'B', 'C']" param="grade"
                         title="Car class"></rental-filters>
 
         <!--        <rental-filters (setFilter)="onSetListingFilter($event)" title="Price sort" param="sort"-->
@@ -55,7 +55,7 @@
           <section class="row mt-2">
             <rental-card (addVehicleToRent)="onAddCarToRent(vehicle)"
                          *ngFor="let vehicle of vehicles, index as i"
-                         [dailyPrice]="getDailyPriceWithCurrency(vehicle.class)"
+                         [dailyPrice]="getDailyPriceWithCurrency(vehicle.grade)"
                          [index]="i"
                          [pickedVehicleId]="rentalCalculator.pickedRentalID"
                          [vehicle]="vehicle"

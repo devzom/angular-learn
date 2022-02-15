@@ -4,7 +4,7 @@
          [src]="vehicle.imageSrc" class="card-img my-2"
          style="min-height: 100px; width: 100%; aspect-ratio: 3/2; object-fit: cover; object-position: center;">
     <p class="h6">{{vehicle?.make}} {{vehicle?.model}}</p>
-    <p class="m-0">Year: {{vehicle?.year}} | Class: {{vehicle?.class}}</p>
+    <p class="m-0">Year: {{vehicle?.year}} | Class: {{vehicle?.grade}}</p>
     <div *ngIf="dailyPrice">
       <p class="mt-0">Day rental price: {{dailyPrice | currency}}</p>
     </div>
