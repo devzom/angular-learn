@@ -41,6 +41,8 @@ export class RentalListingComponent implements OnInit {
     this.availableVehicles = this.rentalListService.fetchVehicles()
 
     this.route.queryParamMap.subscribe(queryParams => {
+      console.log('RUN queryParamMap subscription event ')
+
       if (queryParams.keys.length) {
         console.log('QueryParams on page reload : ', queryParams.keys)
 
@@ -108,7 +110,9 @@ export class RentalListingComponent implements OnInit {
       actualParams = queryParam
     }).unsubscribe()
 
-    console.log({actualParams})
+    console.log('Class: RentalListingComponent, Function: getCurrentQueryParams, Line 115 (actualParams): '
+      , actualParams);
+
     return actualParams
   }
 
@@ -116,11 +120,9 @@ export class RentalListingComponent implements OnInit {
     let queryParams = {}
     const actualQueryParams = this.getCurrentQueryParams() || {}
 
-
     const param = event.param
     const value = event.value.toLocaleLowerCase()
     const queryParam = {[param]: value}
-
 
     // reset filter if user pick option 'all' which reset the filter
     // @ts-ignore
@@ -135,12 +137,10 @@ export class RentalListingComponent implements OnInit {
       queryParams = {...actualQueryParams, ...queryParam}
     }
 
-    await this.router.navigate(['/vehicles'], {
+    await this.router.navigate([], {
       relativeTo: this.route,
       queryParams: queryParams
     });
-
-    this.filterVehicles({param, value})
   }
 
   filterVehicles(filter: { [key: string]: string | number }) {
