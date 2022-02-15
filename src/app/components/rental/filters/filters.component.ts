@@ -6,9 +6,16 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
   styleUrls: ['./filters.component.css']
 })
 export class FiltersComponent implements OnInit {
-  @Input() param: string = 'param'; // used as query param key
-  @Input() title: string = 'Filters'; // section title
-  @Input() filters: Array<string> = []; // array of filters
+  // @Input() param: string = 'param'; // used as query param key
+  // @Input() name: string = 'Filters'; // section title
+  // @Input() filters: any = []; // array of filters
+  @Input() filter: any = {}; // filter object which contains all data
+
+  baseFilterOption = {
+    parameter: this.filter.parameter,
+    name: this.filter.name,
+    value: 'all'
+  }
 
   // outputs
   @Output() setFilter = new EventEmitter()
@@ -16,17 +23,21 @@ export class FiltersComponent implements OnInit {
   constructor() {
   }
 
-  handleRadioChange(event: any) {
-    const filterObj = {
-      param: this.param,
-      value: event.target.value
-    }
-
-    this.setFilter.emit(filterObj)
-  }
 
   ngOnInit() {
 
 
   }
+
+  handleRadioChange(event: any) {
+    const filterObj = {
+      param: this.filter.parameter,
+      value: event.target.value,
+      filterKey: ''
+    }
+
+    this.setFilter.emit(filterObj)
+  }
+
+
 }

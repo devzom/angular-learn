@@ -38,8 +38,11 @@
 
       <section id="rental-filters">
         <p class="h5 border-bottom border-1 border-dark py-2">Filters</p>
-        <rental-filters (setFilter)="onSetListingFilter($event)" [filters]="['All', 'A', 'B', 'C']" param="grade"
-                        title="Car class"></rental-filters>
+
+        <rental-filters (setFilter)="onSetListingFilter($event)"
+                        *ngFor="let radioFilter of rentalListService.getFiltersByType('radio')"
+                        [filter]="radioFilter"
+        ></rental-filters>
 
         <!--        <rental-filters (setFilter)="onSetListingFilter($event)" title="Price sort" param="sort"-->
         <!--                        [filters]="['ascending','descending']"></rental-filters>-->

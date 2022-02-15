@@ -1,14 +1,27 @@
 <div>
-  <strong class="d-block py-2">{{title}}:</strong>
-  <div *ngFor="let filter of filters" class="form-check">
+  <strong class="d-block py-2">{{filter.name}}:</strong>
+
+  <div class="form-check">
     <input (change)="handleRadioChange($event)"
-           [name]="'filterName-'+ param"
-           [value]="filter"
+           [name]="'filterName-'+ filter.parameter"
+           [value]="baseFilterOption.value"
            class="form-check-input"
            type="radio"
     >
-    <label [for]="filter + '-' + param" class="form-check-label">
-      {{filter | titlecase}}
+    <label [for]="baseFilterOption.value + '-' + filter.parameter" class="form-check-label">
+      <strong>{{baseFilterOption.value | titlecase}}</strong>
+    </label>
+  </div>
+
+  <div *ngFor="let option of filter.options" class="form-check">
+    <input (change)="handleRadioChange($event)"
+           [name]="'filterName-'+ filter.parameter"
+           [value]="option"
+           class="form-check-input"
+           type="radio"
+    >
+    <label [for]="option + '-' + filter.parameter" class="form-check-label">
+      {{option | titlecase}}
     </label>
   </div>
 </div>
