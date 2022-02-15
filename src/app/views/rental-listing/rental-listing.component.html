@@ -66,8 +66,9 @@
           </section>
 
           <section class="row d-flex justify-content-end mt-5">
-            <div class="col-auto d-flex flex-row align-items-end justify-content-end gap-2">
-              <p class="text-nowrap">Rental days:</p>
+            <div class="col-auto d-flex flex-row align-items-center justify-content-end gap-2">
+              <p class="text-nowrap m-0">Rental days:</p>
+
               <input (ngModelChange)="rentalCalculator.setDays($event)"
                      [disabled]="!rentalCalculator.pickedRentalID"
                      [ngModel]="rentalCalculator.rentalDays"
@@ -85,6 +86,7 @@
             <rental-summary [days]="rentalCalculator.rentalDays"
                             [price]="rentalCalculator.rentalPrice"
             ></rental-summary>
+
             <rental-checkout
               (onCheckoutClick)="onCheckoutClick()"
               [isDisabled]="isCheckoutDisabled()"
