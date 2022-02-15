@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {environment} from '../../environments/environment';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class VehiclesService {
+export class VehiclesApiService {
 
   baseHeaders = {
     'x-rapidapi-host': 'car-data.p.rapidapi.com',
@@ -17,7 +17,7 @@ export class VehiclesService {
 
   getCarsMake() {
     return this.http.get(`${environment.BASE_VEHICLES_API}/makes`, {
-    // @ts-ignore
+      // @ts-ignore
       headers: {
         ...this.baseHeaders
       }

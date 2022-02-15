@@ -6,21 +6,22 @@ import {HttpClientModule} from "@angular/common/http";
 import {AppComponent} from './app.component';
 import {HeroComponent} from './components/base/hero/hero.component';
 import {ButtonComponent} from './components/base/button/button.component';
-import {CardComponent} from './components/rental/card/card.component';
-import {SummaryComponent} from './components/rental/summary/summary.component';
-import {CategoriesComponent} from './components/rental/categories/categories.component';
+import {CardComponent} from './vehicles/components/rental/card/card.component';
+import {SummaryComponent} from './vehicles/components/rental/summary/summary.component';
+import {CategoriesComponent} from './vehicles/components/rental/categories/categories.component';
 
 // directives
 import {DefinitionDirective} from './directives/definition.directive';
-import {CheckoutComponent} from './components/rental/checkout/checkout.component';
+import {CheckoutComponent} from './vehicles/components/rental/checkout/checkout.component';
 import {AppRoutingModule} from "./app.routing.module";
-import {RentalDetailsComponent} from './views/rental-details/rental-details.component';
+import {RentalDetailsComponent} from './vehicles/views/rental-details/rental-details.component';
 import {HeaderComponent} from './components/header/header.component';
 import {FooterComponent} from './components/footer/footer.component';
-import {RentalListingComponent} from './views/rental-listing/rental-listing.component';
+import {RentalListingComponent} from './vehicles/views/rental-listing/rental-listing.component';
 import {PageNotFoundComponent} from './views/page-not-found/page-not-found.component';
-import {RentalHomeComponent} from './views/rental-home/rental-home.component';
-import {FiltersComponent} from './components/rental/filters/filters.component';
+import {HomepageComponent} from './views/homepage/homepage.component';
+import {FiltersComponent} from './vehicles/components/rental/filters/filters.component';
+import {VehiclesModule} from './vehicles/vehicles.module';
 
 
 @NgModule({
@@ -41,14 +42,15 @@ import {FiltersComponent} from './components/rental/filters/filters.component';
     FooterComponent,
     RentalListingComponent,
     PageNotFoundComponent,
-    RentalHomeComponent,
+    HomepageComponent,
     FiltersComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    VehiclesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -4,7 +4,7 @@ import {RentalCalculatorService} from "../../services/rental-calculator.service"
 import {RentalCheckoutService} from "../../services/rental-checkout.service";
 import {RentalPricingService} from "../../services/rental-pricing.service";
 import {RentalListService} from "../../services/rental-list.service";
-import {VehiclesService} from "../../services/vehicles.service";
+import {VehiclesApiService} from "../../services/vehicles-api.service";
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
@@ -32,7 +32,7 @@ export class RentalListingComponent implements OnInit {
     public checkoutService: RentalCheckoutService,
     public pricingService: RentalPricingService,
     public rentalListService: RentalListService,
-    private carsService: VehiclesService
+    private vehicleApiService: VehiclesApiService
   ) {
     titleService.setTitle('Car rental')
   }
@@ -68,7 +68,7 @@ export class RentalListingComponent implements OnInit {
   }
 
   fetchCarsMakeAPI() {
-    this.vehiclesMakes$ = this.carsService.getCarsMake()
+    this.vehiclesMakes$ = this.vehicleApiService.getCarsMake()
   }
 
   onAddCarToRent(car: IVehicle) {

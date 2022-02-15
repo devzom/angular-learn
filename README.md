@@ -9,6 +9,7 @@ author: Jakub Zomerfeld / @devzom
   - vehicles list page,
   - vehicle details page
 - [x] use routerOutlet and router table
+  - [x] handle navbar routerActiveLink
 - [x] handle 404 (as a page)
 - [x] mock vehicles data
 - [x] create a few reusable components
@@ -29,6 +30,10 @@ author: Jakub Zomerfeld / @devzom
 - [x] use API to fetch data -> vehicles makes
   - [x] trigger API cal by btn.click() to fetch categories visible in `<aside/>`
   - [ ] mock data form API
+- [ ] feature modules / lazy loading
+  - [x] split rental/vehicles view/components/routing into **vehicle-module**
+  - [x] main module contains homepage
+  - [ ] checkout module
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.2.
 
