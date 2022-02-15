@@ -41,12 +41,18 @@ export class RentalListingComponent implements OnInit {
     this.availableVehicles = this.rentalListService.fetchVehicles()
 
     this.route.queryParamMap.subscribe(queryParams => {
-      if (!!queryParams.keys.length) {
+      if (queryParams.keys.length) {
+        console.log('QueryParams on page reload : ', queryParams.keys)
+
         if (queryParams.has('grade')) {
           const value = queryParams.get('grade')
 
+          console.log('Class: RentalListingComponent, Function: , Line 51 (): queryParams.get(\'grade\')');
+
           // @ts-ignore
           this.vehicles = this.filterVehicles({grade: value})
+        } else {
+          this.vehicles = this.availableVehicles
         }
 
       } else {
@@ -141,6 +147,8 @@ export class RentalListingComponent implements OnInit {
     let vehicles: any[] = []
     const filterKey = Object.keys(filter)[0]
     const filterValue = filter[filterKey]
+
+    console.log('Filter listing by filter: ', filter)
 
     if (filterValue == 'all') {
       vehicles = this.availableVehicles

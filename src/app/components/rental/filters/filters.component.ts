@@ -6,9 +6,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
   styleUrls: ['./filters.component.css']
 })
 export class FiltersComponent implements OnInit {
-  // @Input() param: string = 'param'; // used as query param key
-  // @Input() name: string = 'Filters'; // section title
-  // @Input() filters: any = []; // array of filters
   @Input() filter: any = {}; // filter object which contains all data
 
   baseFilterOption = {
@@ -25,8 +22,6 @@ export class FiltersComponent implements OnInit {
 
 
   ngOnInit() {
-
-
   }
 
   handleRadioChange(event: any) {
@@ -38,6 +33,4 @@ export class FiltersComponent implements OnInit {
 
     this.setFilter.emit(filterObj)
   }
-
-
 }
