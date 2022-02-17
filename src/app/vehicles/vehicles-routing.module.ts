@@ -4,8 +4,8 @@ import {RentalListingComponent} from "./views/rental-listing/rental-listing.comp
 import {RentalDetailsComponent} from "./views/rental-details/rental-details.component";
 
 const routes: Routes = [
-  {path: 'vehicles', component: RentalListingComponent},
-  {path: 'vehicles/:id', component: RentalDetailsComponent},
+  {path: '', component: RentalListingComponent},
+  {path: ':id', component: RentalDetailsComponent},
 ];
 
 @NgModule({

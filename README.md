@@ -32,6 +32,7 @@ author: Jakub Zomerfeld / @devzom
   - [ ] mock data form API
 - [ ] feature modules / lazy loading
   - [x] split rental/vehicles view/components/routing into **vehicle-module**
+  - [x] lazy loaded **Vehicles** module
   - [x] main module contains homepage
   - [ ] checkout module
 

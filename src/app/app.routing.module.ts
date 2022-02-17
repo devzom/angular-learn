@@ -5,7 +5,11 @@ import {PageNotFoundComponent} from "./views/page-not-found/page-not-found.compo
 
 const routes: Routes = [
   {path: '', component: HomepageComponent},
-  // {path: '**', component: PageNotFoundComponent},  // Wildcard route for a 404 page
+  {
+    path: 'vehicles',
+    loadChildren: () => import('./vehicles/vehicles-routing.module').then(m => m.VehiclesRoutingModule)
+  },
+  {path: '**', component: PageNotFoundComponent},  // Wildcard route for a 404 page
 ]; // sets up routes constant where you define your routes
 
 // configures NgModule imports and exports
