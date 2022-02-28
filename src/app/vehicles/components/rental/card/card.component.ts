@@ -32,7 +32,7 @@ export class CardComponent implements OnInit {
   }
 
   isPicked() {
-    // return this.vehicle.id === this.pickedVehicleId
+    return this.vehicle.id === this.pickedVehicleId
   }
 
 }

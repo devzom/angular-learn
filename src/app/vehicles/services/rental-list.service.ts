@@ -90,7 +90,7 @@ export class RentalListService {
   }
 
   getVehicleById(id: any) {
-    this.fetchVehicles()
+    this.vehicles = vehiclesMock
 
     let result = {}
 

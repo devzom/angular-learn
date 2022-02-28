@@ -14,6 +14,7 @@ export class RentalDetailsComponent implements OnInit {
   // details$: Observable<any> | undefined;
   details: any;
   id: number | undefined
+  dailyPrice: number = 0
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -28,6 +29,11 @@ export class RentalDetailsComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = params['id'];
       this.details = this.rentalListService.getVehicleById(this.id)
+      
+      // get price by vehicle grade class
+      if (this.details?.grade) {
+        this.dailyPrice = this.pricingService.getByGrade(this.details.grade)
+      }
     });
   }
 }
