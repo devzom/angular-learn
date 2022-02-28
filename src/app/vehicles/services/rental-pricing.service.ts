@@ -18,8 +18,7 @@ export class RentalPricingService {
   }
 
   getByGrade(grade: any) {
-    if (!grade) return 0
-    return this.pricing[grade]
+    console.log({grade})
+    return !grade ? 0 : this.pricing?.[grade]
   }
-
 }

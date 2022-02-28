@@ -5,8 +5,7 @@
     </div>
   </div>
 
-  <base-hero
-  >
+  <base-hero>
     <h1 class="h4" slot="title">Vehicle details: {{id}}</h1>
   </base-hero>
 </section>
@@ -14,7 +13,6 @@
 
 <section class="row mt-2 d-flex justify-content-center">
   <rental-card
-    [dailyPrice]="pricingService.getByGrade(details.grade)"
     [vehicle]="details"
     class="col-12 col-md-4"
   ></rental-card>

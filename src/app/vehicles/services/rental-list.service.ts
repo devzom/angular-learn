@@ -1,17 +1,17 @@
 import {Injectable} from '@angular/core';
 import vehiclesMock from "../../../mock/vehicles";
+import {BehaviorSubject, Observable, of} from "rxjs";
+import {HttpClient} from "@angular/common/http";
+
+const initData: any[] = [];
+const baseURL = "https://jsonplaceholder.typicode.com"
 
 @Injectable({
   providedIn: 'root'
 })
 export class RentalListService {
 
-  constructor() {
-  }
-
-  vehicles: IVehicle[] = vehiclesMock
-  availableVehicles: IVehicle[] = []
-
+  vehicles: any = of([]);
   filters = [
     {
       parameter: 'grade',
@@ -23,7 +23,7 @@ export class RentalListService {
       parameter: 'engine_type',
       name: 'Engine type',
       type: 'radio',
-      options: ['diesel', 'gasoline', 'gas', 'hybrid', 'electric']
+      options: ['diesel', 'gasoline', 'hybrid', 'electric']
     },
     {
       parameter: 'sort',
@@ -53,7 +53,30 @@ export class RentalListService {
       ]
     }
   ]
+  availableVehicles: IVehicle[] = []
+  private DataStore: any = new BehaviorSubject(initData)
+  data$: Observable<any> = this.DataStore.asObservable()
 
+  constructor(private http: HttpClient) {
+  }
+
+
+  // loadTodos() {
+  //   this.http.get(`${baseURL}/todos/1`)
+  //     .subscribe(data => {
+  //       this.DataStore.next(data)
+  //     })
+  // }
+
+  loadVehiclesData() {
+    this.vehicles.subscribe((data: any) => {
+      console.log('Run vehicle subscribe: ', data)
+      this.DataStore.next(data)
+    })
+
+    console.log('Class: RentalListService, Function: loadVehiclesData, Line 80 | this.vehicles, Expected:(): '
+      , this.data$);
+  }
 
   getFiltersByType(type: string) {
     return this.filters.filter(filter => filter.type === type)
@@ -61,16 +84,22 @@ export class RentalListService {
 
 
   fetchVehicles() {
+    this.vehicles = vehiclesMock
     this.availableVehicles = this.vehicles
     return this.availableVehicles
   }
 
   getVehicleById(id: any) {
-    if (Number(id)) {
-      return this.vehicles.filter(vehicle => vehicle.id == id)[0]
+    this.fetchVehicles()
+
+    let result = {}
+
+    if (id) {
+      result = this.vehicles.filter((vehicle: { id: any; }) => vehicle.id == id)[0]
     }
 
-    return null
+    console.log({result})
+    return result
   }
 
 
@@ -86,4 +115,5 @@ export class RentalListService {
   getAvailableVehiclesIds() {
     return this.getAvailableVehicles().map(item => item?.id)
   }
+
 }

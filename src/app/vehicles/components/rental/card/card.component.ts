@@ -9,7 +9,7 @@ export class CardComponent implements OnInit {
   @Input() vehicle!: IVehicle;
   @Input() disabledBtn: boolean = false;
   @Input() allowPickAction: boolean | string = false;
-  @Input() pickedVehicleId: any;
+  @Input() pickedVehicleId: any = 0;
   @Input() dailyPrice: number = 0;
   @Input() index: any; // test
 
@@ -32,7 +32,7 @@ export class CardComponent implements OnInit {
   }
 
   isPicked() {
-    return this.vehicle.id === this.pickedVehicleId
+    // return this.vehicle.id === this.pickedVehicleId
   }
 
 }

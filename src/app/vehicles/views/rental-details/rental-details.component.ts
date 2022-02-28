@@ -11,7 +11,7 @@ import {RentalPricingService} from "../../services/rental-pricing.service";
   styleUrls: []
 })
 export class RentalDetailsComponent implements OnInit {
-  details$: Observable<any> | undefined;
+  // details$: Observable<any> | undefined;
   details: any;
   id: number | undefined
 
@@ -23,16 +23,11 @@ export class RentalDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    const vehicleId = this.route.snapshot.paramMap.get('id');
+    // const vehicleId = this.route.snapshot.paramMap.get('id');
 
     this.route.params.subscribe(params => {
       this.id = params['id'];
-
       this.details = this.rentalListService.getVehicleById(this.id)
     });
-
-
   }
-
 }

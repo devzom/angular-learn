@@ -24,6 +24,8 @@ export class RentalListingComponent implements OnInit {
   daysAmount = this.rentalCalculator.rentalDays
   vehiclesMakes$: any;
 
+  todosData$ = this.rentalListService.data$
+
   constructor(
     private titleService: Title,
     private route: ActivatedRoute,
@@ -39,6 +41,8 @@ export class RentalListingComponent implements OnInit {
 
   ngOnInit() {
     this.availableVehicles = this.rentalListService.fetchVehicles()
+
+    // this.rentalListService.loadTodos()
 
     this.route.queryParamMap.subscribe(queryParams => {
       console.log('RUN queryParamMap subscription event ')
@@ -154,7 +158,7 @@ export class RentalListingComponent implements OnInit {
       vehicles = this.availableVehicles
     } else {
       // @ts-ignore
-      vehicles = this.availableVehicles.filter(vehicle => vehicle[filterKey]?.toLowerCase() == filterValue)
+      vehicles = this.availableVehicles.filter(vehicle => vehicle?.[filterKey]?.toLowerCase() == filterValue)
     }
 
     return vehicles

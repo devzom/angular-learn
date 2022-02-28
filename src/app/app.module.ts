@@ -50,7 +50,7 @@ import {VehiclesModule} from './vehicles/vehicles.module';
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    // VehiclesModule
+    VehiclesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
