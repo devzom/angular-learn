@@ -28,6 +28,7 @@ export class CardComponent implements OnInit {
 
   // send signal to parent component
   onRentalButtonClick(vehicle: IVehicle) {
+    if (this.disabledBtn) return
     this.addVehicleToRent.emit(vehicle)
   }
 
