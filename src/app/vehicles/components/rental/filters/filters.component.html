@@ -17,6 +17,7 @@
     <input (change)="handleRadioChange($event)"
            [name]="'filterName-'+ filter.parameter"
            [value]="option"
+           [id]="option + '-' + filter.parameter"
            class="form-check-input"
            type="radio"
     >
