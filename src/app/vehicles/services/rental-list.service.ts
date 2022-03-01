@@ -4,7 +4,8 @@ import {BehaviorSubject, Observable, of} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 
 const initData: any[] = [];
-const baseURL = "https://jsonplaceholder.typicode.com"
+
+// const baseURL = "https://jsonplaceholder.typicode.com"
 
 @Injectable({
   providedIn: 'root'
@@ -91,14 +92,12 @@ export class RentalListService {
 
   getVehicleById(id: any) {
     this.vehicles = vehiclesMock
-
     let result = {}
 
     if (id) {
       result = this.vehicles.filter((vehicle: { id: any; }) => vehicle.id == id)[0]
     }
 
-    console.log({result})
     return result
   }
 

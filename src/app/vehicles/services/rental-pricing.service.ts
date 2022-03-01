@@ -17,8 +17,7 @@ export class RentalPricingService {
   constructor() {
   }
 
-  getByGrade(grade: any) {
-    console.log({grade})
+  getByGrade(grade: string) {
     return !grade ? 0 : this.pricing?.[grade]
   }
 }
