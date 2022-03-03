@@ -89,12 +89,17 @@
 
         <div class="form-group">
           <label for="phoneNumber">Phone number</label>
-          <input class="form-control" formControlName="phoneNumber" id="phoneNumber" type="number">
+          <input aria-describedby="phoneNumberHelp" class="form-control" formControlName="phoneNumber" id="phoneNumber"
+                 type="text">
+          <small class="form-text text-muted" id="phoneNumberHelp">Phone number must be 9 digits.</small>
           <div
             *ngIf="checkoutForm.get('phoneNumber')?.invalid && (checkoutForm.get('phoneNumber')?.dirty || checkoutForm.get('phoneNumber')?.touched)"
             class="text-danger mt-1">
             <div *ngIf="checkoutForm.get('phoneNumber')?.errors?.['required']">
               Field is required.
+            </div>
+            <div *ngIf="checkoutForm.get('phoneNumber')?.errors?.['pattern']">
+              Value is invalid, must be 9 digits.
             </div>
           </div>
         </div>

@@ -17,7 +17,7 @@ export class CheckoutComponent implements OnInit {
     }),
     address: new FormControl('', [Validators.required, Validators.nullValidator, Validators.minLength(10)]),
     documentId: new FormControl('', [Validators.required, Validators.nullValidator, Validators.minLength(9)]),
-    phoneNumber: new FormControl('', [Validators.required, Validators.nullValidator]),
+    phoneNumber: new FormControl('', [Validators.required, Validators.nullValidator, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
     email: new FormControl('', [Validators.required, Validators.email])
   })
   orderDetails: any = {}
