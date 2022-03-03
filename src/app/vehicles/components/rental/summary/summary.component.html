@@ -1,5 +1,9 @@
 <div class="col-12">
-  <h6>Rental price: <strong>{{price | currency:'USD':'symbol':'1.2-2'}}</strong> (
-    for {{days}} days)
+  <div *ngIf="details?.make">
+    <h5>You have picked {{details?.make}} {{details?.model}}
+    </h5>
+  </div>
+
+  <h6>Rental price: <strong>{{price | currency:'USD':'symbol':'1.2-2'}}</strong>
   </h6>
 </div>

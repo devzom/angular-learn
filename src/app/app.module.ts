@@ -22,6 +22,7 @@ import {PageNotFoundComponent} from './views/page-not-found/page-not-found.compo
 import {HomepageComponent} from './views/homepage/homepage.component';
 import {FiltersComponent} from './vehicles/components/rental/filters/filters.component';
 import {VehiclesModule} from './vehicles/vehicles.module';
+import {Logger} from "./services/logger.service";
 
 
 @NgModule({
@@ -52,7 +53,7 @@ import {VehiclesModule} from './vehicles/vehicles.module';
     AppRoutingModule,
     VehiclesModule
   ],
-  providers: [],
+  providers: [Logger],
   bootstrap: [AppComponent]
 })
 export class AppModule {

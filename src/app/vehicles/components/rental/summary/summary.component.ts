@@ -8,6 +8,7 @@ import {Component, Input} from '@angular/core';
 export class SummaryComponent {
   @Input() price: number = 0
   @Input() days: number = 0
+  @Input() details: any = {}
 
   constructor() {
   }

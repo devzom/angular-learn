@@ -7,7 +7,7 @@ import {Title} from "@angular/platform-browser";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-
+  public counter = 0;
 
   constructor(
     private titleService: Title,
@@ -18,6 +18,10 @@ export class AppComponent implements OnInit {
   ngOnInit() {
   }
 
+  fireEvent() {
+    console.log('fireEvent on app-root')
+    this.counter++;
+  }
 
   testLog(msg: any = 'test log') {
     console.log(msg)

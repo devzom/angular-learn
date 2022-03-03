@@ -16,10 +16,11 @@ export class RentalCheckoutService {
 
   checkout(checkoutData: any) {
     let checkoutResponse = this.alertCheckout({...checkoutData})
+
     if (!checkoutResponse) {
       alert('You have canceled the checkout')
     } else {
-      this.rentalListService.setVehicleUnavailable(checkoutData?.vehicleId)
+      this.rentalListService.setVehicleUnavailable(checkoutData?.id)
     }
 
     return checkoutResponse

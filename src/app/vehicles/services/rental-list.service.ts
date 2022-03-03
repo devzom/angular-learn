@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import vehiclesMock from "../../../mock/vehicles";
-import {BehaviorSubject, Observable, of} from "rxjs";
+import {BehaviorSubject, filter, Observable, of} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 
 const initData: any[] = [];
@@ -113,6 +113,11 @@ export class RentalListService {
 
   getAvailableVehiclesIds() {
     return this.getAvailableVehicles().map(item => item?.id)
+  }
+
+
+  getRadioFilters() {
+    return this.filters.filter(filter => filter.type === "radio")
   }
 
 }

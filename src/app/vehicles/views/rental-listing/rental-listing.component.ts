@@ -1,11 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Title} from "@angular/platform-browser";
 import {RentalCalculatorService} from "../../services/rental-calculator.service";
 import {RentalCheckoutService} from "../../services/rental-checkout.service";
 import {RentalPricingService} from "../../services/rental-pricing.service";
 import {RentalListService} from "../../services/rental-list.service";
 import {VehiclesApiService} from "../../services/vehicles-api.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-rental-listing',
@@ -19,15 +19,18 @@ export class RentalListingComponent implements OnInit {
   availableVehicles: IVehicle[] = []
 
   isLoading: boolean = true
-  isCheckoutProcessing = false
+  isCheckoutProcessing: boolean = false
   isCheckoutFinishedAndSucceed: boolean = false;
-  daysAmount = this.rentalCalculator.rentalDays
+
+  rentalDaysInput = new FormControl({
+    value: this.rentalCalculator.rentalDays,
+    disabled: false
+  })
+
   vehiclesMakes$: any;
 
-  todosData$ = this.rentalListService.data$
 
   constructor(
-    private titleService: Title,
     private route: ActivatedRoute,
     private router: Router,
     public rentalCalculator: RentalCalculatorService,
@@ -36,31 +39,37 @@ export class RentalListingComponent implements OnInit {
     public rentalListService: RentalListService,
     private vehicleApiService: VehiclesApiService
   ) {
-    titleService.setTitle('Car rental')
   }
 
   ngOnInit() {
+    this.rentalDaysInput.valueChanges
+      .subscribe((response) => {
+        this.rentalCalculator.setDays(response)
+      });
+
     this.availableVehicles = this.rentalListService.fetchVehicles()
 
-    // this.rentalListService.loadTodos()
-
     this.route.queryParamMap.subscribe(queryParams => {
-      console.log('RUN queryParamMap subscription event ')
+      // console.log('RUN queryParamMap subscription event ')
 
       if (queryParams.keys.length) {
         console.log('QueryParams on page reload : ', queryParams.keys)
 
-        if (queryParams.has('grade')) {
-          const value = queryParams.get('grade')
+        const gradeFilterValue = queryParams.get('grade')
+        const engineFilterValue = queryParams.get('engine_type')
 
-          console.log('Class: RentalListingComponent, Function: , Line 51 (): queryParams.get(\'grade\')');
-
-          // @ts-ignore
-          this.vehicles = this.filterVehicles({grade: value})
-        } else {
-          this.vehicles = this.availableVehicles
+        if (gradeFilterValue) {
+          this.vehicles = this.filterVehicles({grade: gradeFilterValue})
         }
 
+        if (engineFilterValue) {
+          this.vehicles = this.filterVehicles({engine_type: engineFilterValue})
+        }
+
+        if (!this.vehicles.length) {
+          console.log('No vehicles, show all')
+          // this.vehicles = this.availableVehicles
+        }
       } else {
         this.vehicles = this.availableVehicles
       }
@@ -75,20 +84,18 @@ export class RentalListingComponent implements OnInit {
     this.vehiclesMakes$ = this.vehicleApiService.getCarsMake()
   }
 
-  onAddCarToRent(car: IVehicle) {
-    this.rentalCalculator.rent(car)
-  }
-
   onCheckoutClick() {
     this.isCheckoutProcessing = true
 
+    const {id, make, model, dailyPrice} = this.rentalCalculator.pickedRental
+    const price = this.rentalCalculator.rentalPrice
+
     setTimeout(() => {
       this.checkoutService.checkout({
-        price: this.rentalCalculator.rentalPrice,
+        id, make, model, dailyPrice,
+        price,
         method: 'Credit card',
-        vehicleId: this.rentalCalculator.pickedRentalID
       })
-
 
       setTimeout(() => {
         this.isCheckoutFinishedAndSucceed = true;
@@ -113,9 +120,6 @@ export class RentalListingComponent implements OnInit {
     this.route.queryParams.subscribe(queryParam => {
       actualParams = queryParam
     }).unsubscribe()
-
-    console.log('Class: RentalListingComponent, Function: getCurrentQueryParams, Line 115 (actualParams): '
-      , actualParams);
 
     return actualParams
   }
@@ -150,29 +154,21 @@ export class RentalListingComponent implements OnInit {
   filterVehicles(filter: { [key: string]: string | number }) {
     let vehicles: any[] = []
     const filterKey = Object.keys(filter)[0]
-    const filterValue = filter[filterKey]
+    const filterValue: string | number = filter[filterKey].toString().toLowerCase()
 
-    console.log('Filter listing by filter: ', filter)
+    console.log(filterKey, filterValue)
 
     if (filterValue == 'all') {
       vehicles = this.availableVehicles
     } else {
       // @ts-ignore
-      vehicles = this.availableVehicles.filter(vehicle => vehicle?.[filterKey]?.toLowerCase() == filterValue)
+      vehicles = this.availableVehicles.filter(vehicle => vehicle?.[filterKey]?.toLowerCase() === filterValue)
     }
 
     return vehicles
   }
 
-  getDailyPriceWithCurrency(vehicleGrade: any) {
-    return this.pricingService.getByGrade(vehicleGrade)
-  }
-
   isCheckoutDisabled() {
     return !this.rentalCalculator.rentalDays || this.rentalCalculator.rentalPrice === 0
-  }
-
-  testLog(msg: any = 'test log') {
-    console.log(msg)
   }
 }

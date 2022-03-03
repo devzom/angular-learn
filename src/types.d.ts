@@ -3,7 +3,7 @@ interface IVehicle {
   model: string;
   make: string;
   year: number;
-  grade?: string;
+  grade: string;
   imageSrc?: string;
   dailyPrice?: number;
 }

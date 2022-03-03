@@ -27,24 +27,27 @@ export class RentalCalculatorService {
   }
 
   get pickedRentalID() {
-    return this.pickedCar?.id || 0
+    return this.pickedCar?.id
   }
 
   calculatePrice(
-    days = this.rentalDaysAmount, grade = this.pickedCar?.grade || null
+    days = this.rentalDaysAmount, grade: string | undefined = this.pickedCar?.grade
   ) {
-    return days * this.rentalPricingService.getByGrade(grade)
+    if (!days && !grade) return
+
+    this.price = days * this.rentalPricingService.getByGrade(grade)
+    return this.price
   }
 
   rent(car: IVehicle): void {
     this.pickedCar = car
-    this.price = this.calculatePrice()
+    this.calculatePrice()
   }
 
   setDays(amount: number) {
     if (!!amount) {
       this.rentalDaysAmount = amount
-      if (this.pickedCar) this.price = this.calculatePrice()
+      if (this.pickedCar) this.calculatePrice()
     }
   }
 

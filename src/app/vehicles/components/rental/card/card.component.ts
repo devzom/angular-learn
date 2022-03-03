@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Input, Output, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'rental-card',
   templateUrl: './card.component.html',
   styles: ['.active-card{ outline: 2px solid green}']
 })
-export class CardComponent implements OnInit {
+export class CardComponent {
   @Input() vehicle!: IVehicle;
   @Input() disabledBtn: boolean = false;
   @Input() allowPickAction: boolean | string = false;
@@ -16,19 +16,10 @@ export class CardComponent implements OnInit {
   // outputs
   @Output() addVehicleToRent = new EventEmitter()
 
-
-  ngOnInit() {
-    // console.log('Init vehicle card: ', {
-    //   vehicle: this.vehicle,
-    //   index: this.index,
-    //   dailyPrice: this.dailyPrice
-    // })
-  }
-
-
   // send signal to parent component
   onRentalButtonClick(vehicle: IVehicle) {
     if (this.disabledBtn) return
+
     this.addVehicleToRent.emit(vehicle)
   }
 
