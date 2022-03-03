@@ -1,0 +1,108 @@
+<div class="container g-5">
+  <!--  Checkout form-->
+  <article class="row d-flex justify-content-center flex-wrap">
+    <section class="col-12">
+      <h1>Checkout </h1>
+      <hr>
+    </section>
+
+    <!--  Checkout order details-->
+    <section *ngIf="detailsAvailable" class="col-12">
+      <h2>Order details: </h2>
+      <ul>
+        <li>Vehicle: {{orderDetails?.model}} {{orderDetails?.make}}</li>
+        <li>Rental details: {{orderDetails?.days}} days</li>
+        <li>Price: {{orderDetails?.price | currency:'USD':'symbol':'1.2-2'}}</li>
+      </ul>
+    </section>
+
+    <section *ngIf="detailsAvailable" class="col-8">
+      <form (ngSubmit)="onCheckoutSubmit($event)" [formGroup]="checkoutForm">
+        <div formGroupName="name">
+          <div class="form-group">
+            <label for="first">Name</label>
+            <input class="form-control" formControlName="first" id="first" type="text">
+            <div
+              *ngIf="checkoutForm.get('name.first')?.invalid && (checkoutForm.get('name.first')?.dirty || checkoutForm.get('name.first')?.touched)"
+              class="text-danger mt-1">
+              <div *ngIf="checkoutForm.get('name.first')?.errors?.['required']">
+                Field is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="nameLast">Lastname</label>
+            <input class="form-control" formControlName="last" id="nameLast" type="text">
+          </div>
+
+          <div
+            *ngIf="checkoutForm.get('name.last')?.invalid && (checkoutForm.get('name.last')?.dirty || checkoutForm.get('name.last')?.touched)"
+            class="text-danger mt-1">
+            <div *ngIf="checkoutForm.get('name.last')?.errors?.['required']">
+              Field is required.
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input class="form-control" formControlName="address" id="address" type="text">
+
+          <div
+            *ngIf="checkoutForm.get('address')?.invalid && (checkoutForm.get('address')?.dirty || checkoutForm.get('address')?.touched)"
+            class="text-danger mt-1">
+            <div *ngIf="checkoutForm.get('address')?.errors?.['required']">
+              Field is required.
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="documentId">Document ID</label>
+          <input aria-describedby="documentIdHelp" class="form-control" formControlName="documentId" id="documentId"
+                 type="text">
+          <small class="form-text text-muted" id="documentIdHelp">Provide You personal Document ID / Personal
+            number</small>
+
+          <div
+            *ngIf="checkoutForm.get('documentId')?.invalid && (checkoutForm.get('documentId')?.dirty || checkoutForm.get('documentId')?.touched)"
+            class="text-danger mt-1">
+            <div *ngIf="checkoutForm.get('documentId')?.errors?.['required']">
+              Field is required.
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input class="form-control" formControlName="email" id="email" type="email">
+
+          <div
+            *ngIf="checkoutForm.get('email')?.invalid && (checkoutForm.get('email')?.dirty || checkoutForm.get('email')?.touched)"
+            class="text-danger mt-1">
+            <div *ngIf="checkoutForm.get('email')?.errors?.['required']">
+              Field is required.
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="phoneNumber">Phone number</label>
+          <input class="form-control" formControlName="phoneNumber" id="phoneNumber" type="number">
+          <div
+            *ngIf="checkoutForm.get('phoneNumber')?.invalid && (checkoutForm.get('phoneNumber')?.dirty || checkoutForm.get('phoneNumber')?.touched)"
+            class="text-danger mt-1">
+            <div *ngIf="checkoutForm.get('phoneNumber')?.errors?.['required']">
+              Field is required.
+            </div>
+          </div>
+        </div>
+
+        <div class=" mt-3 d-flex justify-content-end">
+          <button [disabled]="checkoutForm.invalid" class="btn btn-success" type="submit">Place the order</button>
+        </div>
+      </form>
+    </section>
+  </article>
+</div>

@@ -23,6 +23,7 @@ import {HomepageComponent} from './views/homepage/homepage.component';
 import {FiltersComponent} from './vehicles/components/rental/filters/filters.component';
 import {VehiclesModule} from './vehicles/vehicles.module';
 import {Logger} from "./services/logger.service";
+import {CheckoutModule} from './checkout/checkout.module';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import {Logger} from "./services/logger.service";
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    VehiclesModule
+    VehiclesModule,
+    CheckoutModule
   ],
   providers: [Logger],
   bootstrap: [AppComponent]

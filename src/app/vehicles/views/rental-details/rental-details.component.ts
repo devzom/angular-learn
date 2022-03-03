@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
-import {Observable} from 'rxjs';
 import {RentalListService} from "../../services/rental-list.service";
 import {RentalPricingService} from "../../services/rental-pricing.service";
 
+// import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-rental-details',
@@ -16,10 +16,11 @@ export class RentalDetailsComponent implements OnInit {
   id: number | undefined
   dailyPrice: number = 0
 
-  constructor(private route: ActivatedRoute,
-              private router: Router,
-              private rentalListService: RentalListService,
-              public pricingService: RentalPricingService,
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private rentalListService: RentalListService,
+    public pricingService: RentalPricingService,
   ) {
   }
 
@@ -29,7 +30,7 @@ export class RentalDetailsComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = params['id'];
       this.details = this.rentalListService.getVehicleById(this.id)
-      
+
       // get price by vehicle grade class
       if (this.details?.grade) {
         this.dailyPrice = this.pricingService.getByGrade(this.details.grade)
