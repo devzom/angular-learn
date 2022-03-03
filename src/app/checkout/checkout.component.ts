@@ -39,12 +39,10 @@ export class CheckoutComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       console.log({params})
       const {vehicleId, days} = params
+      let price = 0
 
       if (vehicleId && days) {
-        let price = 0
-
         const vehicleDetails = this.rentalListService.getVehicleById(vehicleId)
-
 
         if (!vehicleDetails) {
           this.router.navigate(['/404'])
@@ -65,6 +63,8 @@ export class CheckoutComponent implements OnInit {
         console.log(this.orderDetails)
 
         this.detailsAvailable = true
+      } else {
+        this.router.navigate(['/404'])
       }
     });
 
