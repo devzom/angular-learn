@@ -45,6 +45,12 @@ export class CheckoutComponent implements OnInit {
 
         const vehicleDetails = this.rentalListService.getVehicleById(vehicleId)
 
+
+        if (!vehicleDetails) {
+          this.router.navigate(['/404'])
+          return
+        }
+
         // @ts-ignore
         if (vehicleDetails?.grade) {
           // @ts-ignore
