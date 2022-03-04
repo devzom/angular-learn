@@ -17,7 +17,7 @@ export class CheckoutComponent implements OnInit {
     }),
     address: new FormControl('', [Validators.required, Validators.nullValidator, Validators.minLength(10)]),
     documentId: new FormControl('', [Validators.required, Validators.nullValidator, Validators.minLength(9)]),
-    phoneNumber: new FormControl('', [Validators.required, Validators.nullValidator, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
+    phoneNumber: new FormControl('', [Validators.required, Validators.nullValidator, Validators.pattern("^((\\+91-?)|0)?[0-9]{9}$")]),
     email: new FormControl('', [Validators.required, Validators.email])
   })
   orderDetails: any = {}
@@ -55,12 +55,16 @@ export class CheckoutComponent implements OnInit {
           price = this.pricingService.getByGrade(vehicleDetails.grade) * days
         }
 
+        if (!price) {
+          console.error('Cannot recalculate price for vehicle rent.')
+          this.router.navigate(['/'])
+        }
+
         this.orderDetails = {
           ...vehicleDetails,
           days,
           price
         }
-        console.log(this.orderDetails)
 
         this.detailsAvailable = true
       } else {
@@ -91,5 +95,13 @@ export class CheckoutComponent implements OnInit {
     this.checkoutForm.reset()
 
     this.router.navigate(['/'])
+  }
+
+
+  canDeactivate() {
+    console.log('Run canDeactivate on Checkout')
+    console.log(this.checkoutForm)
+
+    return this.checkoutForm?.touched || this.checkoutForm?.dirty
   }
 }

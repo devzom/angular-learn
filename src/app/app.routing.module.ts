@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {HomepageComponent} from "./views/homepage/homepage.component";
 import {PageNotFoundComponent} from "./views/page-not-found/page-not-found.component";
-import {CheckoutComponent} from "./checkout/checkout.component";
 import {CheckoutGuard} from "./guards/checkout.guard";
 
 const routes: Routes = [
@@ -14,6 +13,8 @@ const routes: Routes = [
   {
     path: 'checkout',
     loadChildren: () => import('./checkout/checkout.module').then(m => m.CheckoutModule),
+    canActivate: [CheckoutGuard],
+    canDeactivate: [CheckoutGuard]
   },
   {path: '**', component: PageNotFoundComponent},  // Wildcard route for a 404 page
 ]; // sets up routes constant where you define your routes
