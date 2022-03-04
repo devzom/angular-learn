@@ -50,7 +50,6 @@ export class RentalListingComponent implements OnInit {
     this.availableVehicles = this.rentalListService.fetchVehicles()
 
     this.route.queryParamMap.subscribe(queryParams => {
-      // console.log('RUN queryParamMap subscription event ')
 
       if (queryParams.keys.length) {
         console.log('QueryParams on page reload : ', queryParams.keys)
@@ -68,8 +67,8 @@ export class RentalListingComponent implements OnInit {
 
         if (!this.vehicles.length) {
           console.log('No vehicles, show all')
-          // this.vehicles = this.availableVehicles
         }
+
       } else {
         this.vehicles = this.availableVehicles
       }
@@ -86,33 +85,21 @@ export class RentalListingComponent implements OnInit {
 
   onCheckoutClick() {
     this.isCheckoutProcessing = true
-
-    const {id, make, model, dailyPrice} = this.rentalCalculator.pickedRental
-    const price = this.rentalCalculator.rentalPrice
+    this.isLoading = true
+    const {id} = this.rentalCalculator.pickedRental
 
     setTimeout(() => {
-      this.checkoutService.checkout({
-        id, make, model, dailyPrice,
-        price,
-        method: 'Credit card',
+      this.isLoading = false
+
+      this.router.navigate(['/checkout'], {
+        queryParams: {
+          vehicleId: <number>id,
+          days: <number>Number(this.rentalCalculator.rentalDays),
+          status: <TCheckoutStatus>'pending'
+        }
       })
-
-      setTimeout(() => {
-        this.isCheckoutFinishedAndSucceed = true;
-        this.isCheckoutProcessing = false
-
-        this.vehicles = this.rentalListService.getAvailableVehicles()
-        this.rentalCalculator.resetData()
-      }, 150)
-
-
-      setTimeout(() => {
-        this.isCheckoutFinishedAndSucceed = false;
-      }, 2000)
-
-    }, 450)
+    }, 1350)
   }
-
 
   getCurrentQueryParams() {
     let actualParams = {}

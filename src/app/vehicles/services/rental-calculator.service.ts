@@ -51,7 +51,6 @@ export class RentalCalculatorService {
     }
   }
 
-
   resetData() {
     this.rentalDaysAmount = 0
     this.price = 0

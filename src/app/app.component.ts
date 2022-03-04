@@ -8,11 +8,14 @@ import {Title} from "@angular/platform-browser";
 })
 export class AppComponent implements OnInit {
   public counter = 0;
+  isOnline: boolean;
 
   constructor(
     private titleService: Title,
   ) {
     titleService.setTitle('Car rental')
+
+    this.isOnline = navigator.onLine;
   }
 
   ngOnInit() {

@@ -13,8 +13,9 @@ const routes: Routes = [
   {
     path: 'checkout',
     loadChildren: () => import('./checkout/checkout.module').then(m => m.CheckoutModule),
-    canActivate: [CheckoutGuard],
-    canDeactivate: [CheckoutGuard]
+    // canActivate: [CheckoutGuard],
+    // canDeactivate: [CheckoutGuard],
+    canLoad: [CheckoutGuard]
   },
   {path: '**', component: PageNotFoundComponent},  // Wildcard route for a 404 page
 ]; // sets up routes constant where you define your routes

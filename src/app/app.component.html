@@ -1,14 +1,17 @@
-<app-header
-  [testVariable]="counter"
-></app-header>
-<!--<button (click)="fireEvent()">fire change</button>-->
+<div class="d-flex flex-column h-100">
+  <app-header></app-header>
 
-<div class="app-body container my-5 py-5 d-flex flex-column gap-2">
-  <div class="row">
-    <div class="col-12">
-      <router-outlet></router-outlet>
-    </div>
+  <div class="container flex-grow-1 flex-shrink-1 py-5">
+    <router-outlet *ngIf="isOnline; else isOffline"></router-outlet>
+    <ng-template #isOffline>
+      <div>
+        <p class="offline-error">Without connection we can not load anything!</p>
+      </div>
+    </ng-template>
   </div>
+
+  <app-footer></app-footer>
 </div>
 
-<app-footer></app-footer>
+
+

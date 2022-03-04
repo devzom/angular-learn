@@ -9,9 +9,12 @@ interface IVehicle {
 }
 
 
-type notUndefined = string | number | boolean | symbol | object;
+type notUndefined = string | number | boolean | symbol | object
 
 interface Dictionary<T extends notUndefined = notUndefined> {
   [key: string]: T | undefined;
 }
 
+
+type TCheckoutMode = 'user' | 'guest'
+type TCheckoutStatus = 'pending' | 'finished' | 'error'

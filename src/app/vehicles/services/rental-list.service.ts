@@ -101,20 +101,18 @@ export class RentalListService {
     return result
   }
 
-
   getAvailableVehicles() {
     return this.availableVehicles
   }
 
   setVehicleUnavailable(vehicleId: number) {
     this.availableVehicles = this.availableVehicles.filter(vehicle => vehicle.id !== vehicleId)
-    console.log('setVehicleUnavailable: ', {vehicleId, availableVehicles: this.getAvailableVehiclesIds()})
+    // console.log('setVehicleUnavailable: ', {vehicleId, availableVehicles: this.getAvailableVehiclesIds()})
   }
 
   getAvailableVehiclesIds() {
     return this.getAvailableVehicles().map(item => item?.id)
   }
-
 
   getRadioFilters() {
     return this.filters.filter(filter => filter.type === "radio")

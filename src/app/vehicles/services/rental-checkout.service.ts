@@ -15,7 +15,7 @@ export class RentalCheckoutService {
   }
 
   checkout(checkoutData: any) {
-    let checkoutResponse = this.alertCheckout({...checkoutData})
+    const checkoutResponse = this.alertCheckout({...checkoutData})
 
     if (!checkoutResponse) {
       alert('You have canceled the checkout')

@@ -2,21 +2,47 @@
   <!--  Checkout form-->
   <article class="row d-flex justify-content-center flex-wrap">
     <section class="col-12">
-      <h1>Checkout </h1>
+      <h1>Car rental checkout</h1>
       <hr>
     </section>
 
     <!--  Checkout order details-->
-    <section *ngIf="detailsAvailable" class="col-12">
-      <h2>Order details: </h2>
-      <ul>
-        <li>Vehicle: {{orderDetails?.model}} {{orderDetails?.make}}</li>
+    <section *ngIf="detailsAvailable && !isCheckoutFinishedAndSucceed" class="col-12">
+      <strong class="">Order details: </strong>
+      <ul class="px-4">
+        <li><strong>Vehicle: {{orderDetails?.model}} {{orderDetails?.make}}</strong></li>
         <li>Rental details: {{orderDetails?.days}} days</li>
         <li>Price: {{orderDetails?.price | currency:'USD':'symbol':'1.2-2'}}</li>
       </ul>
     </section>
 
-    <section *ngIf="detailsAvailable" class="col-8">
+    <!-- checkout states-->
+    <section>
+      <div *ngIf="isCheckoutProcessing" class="alert alert-info my-3 h-5" role="alert">
+        Checkout is in progress
+      </div>
+
+      <div *ngIf="isCheckoutFinishedAndSucceed" class="alert alert-success my-3 h-5" role="alert">
+        Checkout finished, the car is waiting to pick up.
+        <p>
+          You'll be redirected to homepage
+        </p>
+      </div>
+    </section>
+
+    <!-- Checkout mode  USER | GUEST-->
+    <section *ngIf="!checkoutMode && (!isCheckoutFinishedAndSucceed && !isCheckoutProcessing)"
+             class="jumbotron text-center">
+      <p class="display-6"> Login or checkout as a guest</p>
+      <div class="d-flex gap-2 justify-content-center">
+        <!--        <button class="btn btn-sm btn-dark" (click)="setCheckoutMode('user')" disabled>Checkout as a logged in user</button>-->
+        <button (click)="setCheckoutMode('guest')" class="btn btn-sm btn-dark">Checkout as a guest</button>
+      </div>
+    </section>
+
+    <section
+      *ngIf="detailsAvailable && checkoutMode==='guest' && (!isCheckoutFinishedAndSucceed && !isCheckoutProcessing)"
+      class="col-8">
       <form (ngSubmit)="onCheckoutSubmit($event)" [formGroup]="checkoutForm">
         <div formGroupName="name">
           <div class="form-group">
@@ -35,7 +61,6 @@
             <label for="nameLast">Lastname</label>
             <input class="form-control" formControlName="last" id="nameLast" type="text">
           </div>
-
           <div
             *ngIf="checkoutForm.get('name.last')?.invalid && (checkoutForm.get('name.last')?.dirty || checkoutForm.get('name.last')?.touched)"
             class="text-danger mt-1">
@@ -48,7 +73,6 @@
         <div class="form-group">
           <label for="address">Address</label>
           <input class="form-control" formControlName="address" id="address" type="text">
-
           <div
             *ngIf="checkoutForm.get('address')?.invalid && (checkoutForm.get('address')?.dirty || checkoutForm.get('address')?.touched)"
             class="text-danger mt-1">
@@ -64,7 +88,6 @@
                  type="text">
           <small class="form-text text-muted" id="documentIdHelp">Provide You personal Document ID / Personal
             number</small>
-
           <div
             *ngIf="checkoutForm.get('documentId')?.invalid && (checkoutForm.get('documentId')?.dirty || checkoutForm.get('documentId')?.touched)"
             class="text-danger mt-1">
@@ -77,7 +100,6 @@
         <div class="form-group">
           <label for="email">Email</label>
           <input class="form-control" formControlName="email" id="email" type="email">
-
           <div
             *ngIf="checkoutForm.get('email')?.invalid && (checkoutForm.get('email')?.dirty || checkoutForm.get('email')?.touched)"
             class="text-danger mt-1">
@@ -100,6 +122,36 @@
             </div>
             <div *ngIf="checkoutForm.get('phoneNumber')?.errors?.['pattern']">
               Value is invalid, must be 9 digits.
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment method-->
+        <div class="form-group mt-2">
+          <strong>Payment method</strong>
+          <div class="form-check">
+            <input class="form-check-input" formControlName="paymentMethod" id="creditCardRadio" name="paymentMethod"
+                   type="radio"
+                   value="credit-card"
+            >
+            <label class="form-check-label" for="creditCardRadio">
+              Credit Card
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" formControlName="paymentMethod" id="bankTransferRadio" name="paymentMethod"
+                   type="radio"
+                   value="bank-transfer"
+            >
+            <label class="form-check-label" for="bankTransferRadio">
+              Bank transfer
+            </label>
+          </div>
+          <div
+            *ngIf="checkoutForm.get('paymentMethod')?.invalid && (checkoutForm.get('paymentMethod')?.dirty || checkoutForm.get('paymentMethod')?.touched)"
+            class="text-danger mt-1">
+            <div *ngIf="checkoutForm.get('paymentMethod')?.errors?.['required']">
+              Field is required.
             </div>
           </div>
         </div>
