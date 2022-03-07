@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
     // userId can be read from URl param of from provided storage by AuthService
     const userId = this.actRoute.snapshot.paramMap?.get('id');
     this.authService.getUserProfile(userId).subscribe((res) => {
-      this.currentUser = res.msg;
+      this.currentUser = res.data;
     });
   }
 
