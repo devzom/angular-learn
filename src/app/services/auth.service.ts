@@ -107,7 +107,7 @@ export class AuthService {
     const removeToken = this.removeToken()
     const removeUser = this.removeUserId()
 
-    if (removeToken == null && removeUser) {
+    if (removeToken == null && removeUser == null) {
       this.router.navigate(['login']);
     }
   }
