@@ -109,6 +109,8 @@ export class AuthService {
 
     if (removeToken == null && removeUser == null) {
       this.router.navigate(['login']);
+    } else {
+      throw new Error('Cannot logout')
     }
   }
 
