@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
   isOnline: boolean;
 
   constructor(
-    private titleService: Title,
+    private titleService: Title
   ) {
     titleService.setTitle('Car rental')
 
@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
   }
+
 
   fireEvent() {
     console.log('fireEvent on app-root')

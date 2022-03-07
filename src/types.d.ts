@@ -8,6 +8,13 @@ interface IVehicle {
   dailyPrice?: number;
 }
 
+interface IUser {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+}
+
 
 type notUndefined = string | number | boolean | symbol | object
 

@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {HttpClientModule} from "@angular/common/http";
 
@@ -24,6 +24,10 @@ import {FiltersComponent} from './vehicles/components/rental/filters/filters.com
 import {VehiclesModule} from './vehicles/vehicles.module';
 import {Logger} from "./services/logger.service";
 import {CheckoutModule} from './checkout/checkout.module';
+import {AuthInterceptor} from "./shared/authconfig.interceptor";
+import {SigninComponent} from './auth/signin/signin.component';
+import {SignupComponent} from './auth/signup/signup.component';
+import {ProfileComponent} from './profile/profile.component';
 
 
 @NgModule({
@@ -46,6 +50,9 @@ import {CheckoutModule} from './checkout/checkout.module';
     PageNotFoundComponent,
     HomepageComponent,
     FiltersComponent,
+    SigninComponent,
+    SignupComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,9 +60,10 @@ import {CheckoutModule} from './checkout/checkout.module';
     HttpClientModule,
     AppRoutingModule,
     VehiclesModule,
-    CheckoutModule
+    CheckoutModule,
+    ReactiveFormsModule
   ],
-  providers: [Logger],
+  providers: [Logger, AuthInterceptor],
   bootstrap: [AppComponent]
 })
 export class AppModule {

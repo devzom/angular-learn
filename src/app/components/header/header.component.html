@@ -5,7 +5,7 @@
             data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="collapse navbar-collapse d-md-flex justify-content-between" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
           <a [routerLinkActiveOptions]="{exact:
@@ -20,6 +20,16 @@ false}" [routerLinkActive]="['active']" class="nav-link" routerLink="/vehicles" 
         <!--          <b>variable (parent): {{testVariable}}</b><br/>-->
         <!--        </li>-->
       </ul>
+
+      <div class="ml-auto">
+        <a *ngIf="authService.isLoggedIn" class="p-2 text-dark" routerLink="/profile">User Profile</a>
+        <a *ngIf="!authService.isLoggedIn" class="p-2 text-dark" routerLink="/login">Sign
+          in</a>
+        <a *ngIf="!authService.isLoggedIn" class="btn btn-outline-dark" routerLink="/register"
+           routerLinkActive="active">Sign up</a>
+        <button (click)="logout()" *ngIf="authService.isLoggedIn" class="btn btn-danger" type="button">Logout
+        </button>
+      </div>
     </div>
   </div>
 </nav>
