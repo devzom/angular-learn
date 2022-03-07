@@ -9,8 +9,6 @@ import {Router} from '@angular/router';
   styleUrls: [],
 })
 export class SignupComponent implements OnInit {
-  signupForm: FormGroup;
-
   constructor(
     public fb: FormBuilder,
     public authService: AuthService,
@@ -23,12 +21,15 @@ export class SignupComponent implements OnInit {
     });
   }
 
+  signupForm: FormGroup;
+
+
   ngOnInit() {
   }
 
   registerUser() {
     this.authService.signUp(this.signupForm.value).subscribe((res) => {
-      if (res.result) {
+      if (res.data) {
         this.signupForm.reset();
         this.router.navigate(['login']);
       }
