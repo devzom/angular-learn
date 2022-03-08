@@ -15,6 +15,8 @@ export class SignupComponent implements OnInit {
   ) {
   }
 
+  isFormValidAndSent: boolean = false
+
   signupForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(4)]),
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -29,8 +31,14 @@ export class SignupComponent implements OnInit {
       .subscribe(
         (res) => {
           if (res.data) {
+            this.isFormValidAndSent = true
             this.signupForm.reset();
-            this.router.navigate(['login']);
+
+            setTimeout(() => {
+              this.isFormValidAndSent = false
+              this.router.navigate(['login']);
+            }, 3000)
+
           }
         },
         err => {
