@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {RentalListService} from "../vehicles/services/rental-list.service";
 import {RentalPricingService} from "../vehicles/services/rental-pricing.service";
@@ -13,6 +13,17 @@ import {RoutingUtilsService} from "../shared/routing-utils.service";
   styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private rentalListService: RentalListService,
+    private pricingService: RentalPricingService,
+    public rentalCalculator: RentalCalculatorService,
+    public checkoutService: RentalCheckoutService,
+    private routingService: RoutingUtilsService
+  ) {
+  }
+
   checkoutForm = new FormGroup({
     name: new FormGroup({
       first: new FormControl('', [Validators.required, Validators.nullValidator]),
@@ -35,17 +46,6 @@ export class CheckoutComponent implements OnInit {
   isCheckoutProcessing: boolean = false
   isCheckoutFinishedAndSucceed: boolean = false;
 
-
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private rentalListService: RentalListService,
-    private pricingService: RentalPricingService,
-    public rentalCalculator: RentalCalculatorService,
-    public checkoutService: RentalCheckoutService,
-    private routingService: RoutingUtilsService
-  ) {
-  }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
