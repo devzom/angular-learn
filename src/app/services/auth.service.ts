@@ -33,14 +33,14 @@ export class AuthService {
 
   // Sign-up
   signUp(user: IUser): Observable<any> {
-    const api = `${this.endpoint}/register-user`;
+    const api = `${this.endpoint}/auth/register`;
     return this.http.post(api, user).pipe(catchError(this.handleError));
   }
 
   // Sign-in
   signIn(user: IUser) {
     return this.http
-      .post<any>(`${this.endpoint}/signin`, user)
+      .post<any>(`${this.endpoint}/auth/login`, user)
       .subscribe((res: any) => {
         const userId = res.userId
         this.setToken(res.token)
@@ -84,7 +84,7 @@ export class AuthService {
       userId = this.getUserId()
     }
 
-    const api = `${this.endpoint}/user-profile/${userId}`;
+    const api = `${this.endpoint}/users/${userId}`;
     const authToken = `Bearer ${this.getToken()}`
 
     if (!authToken) {
