@@ -82,12 +82,17 @@ export class AuthService {
     let userId = id
     if (!userId) {
       userId = this.getUserId()
+
+      if (!userId) {
+        this.doLogout()
+      }
     }
 
     const api = `${this.endpoint}/users/${userId}`;
     const authToken = `Bearer ${this.getToken()}`
 
     if (!authToken) {
+      this.router.navigate(['login']);
       throw Error('Cannot get Authorization token')
     }
 
@@ -95,8 +100,10 @@ export class AuthService {
       map((res) => {
         return res || {};
       }),
-
-      catchError(this.handleError)
+      catchError(err => {
+        this.checkAuthorization(err)
+        return this.handleError(err);
+      })
     );
   }
 
@@ -126,7 +133,16 @@ export class AuthService {
   //   return msg;
   // }
 
-  handleError(error: HttpErrorResponse) {
+  checkAuthorization(error: HttpErrorResponse) {
+    if (error.status === 401) {
+      this.doLogout()
+      return false
+    }
+
+    return error
+  }
+
+  async handleError(error: HttpErrorResponse) {
     let errorMsg: string;
 
     if (error.status === 0) {
@@ -150,6 +166,7 @@ export class AuthService {
         return `Not Found: ${error.message}`;
       }
       case 403: {
+
         return `Access Denied: ${error.message}`;
       }
       case 500: {
