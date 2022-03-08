@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
-import {pipe} from "rxjs";
 
 @Component({
   selector: 'app-signup',
@@ -16,30 +15,48 @@ export class SignupComponent implements OnInit {
   ) {
   }
 
-  formIsValid: boolean | null = null
-
   signupForm = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.nullValidator, Validators.minLength(4)]),
+    name: new FormControl('', [Validators.required, Validators.minLength(4)]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.nullValidator, Validators.minLength(8)]),
+    password: new FormControl('', [Validators.required, Validators.minLength(5)]),
   })
 
   ngOnInit() {
   }
 
   registerUser() {
-
-    if (this.signupForm.status == "INVALID") {
-      this.formIsValid = false
-      return
-    }
-
     this.authService.signUp(this.signupForm.value)
       .subscribe(
         (res) => {
           if (res.data) {
             this.signupForm.reset();
             this.router.navigate(['login']);
+          }
+        },
+        err => {
+          if (Array.isArray(err.error)) {
+
+            for (const errElement of err.error) {
+              const formControl = this.signupForm.get(errElement.param);
+
+              if (formControl) {
+                formControl.setErrors({
+                  serverError: {
+                    errElement, message: errElement.msg
+                  }
+                });
+              }
+            }
+
+          } else {
+            Object.keys(err.error.error.errors).forEach(prop => {
+              const formControl = this.signupForm.get(prop);
+              if (formControl) {
+                formControl.setErrors({
+                  serverError: err.error.error.errors[prop]
+                });
+              }
+            })
           }
         });
   }

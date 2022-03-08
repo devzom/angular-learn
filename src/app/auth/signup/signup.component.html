@@ -17,10 +17,14 @@
           type="text"
         />
         <div
-          *ngIf="signupForm.get('name')?.invalid && (signupForm.get('name')?.dirty || signupForm.get('name')?.touched)"
+          *ngIf="signupForm.get('name')?.invalid && (signupForm.get('name')?.dirty || signupForm.get('name')?.touched) ||signupForm.get('name')?.errors?.['serverError']"
           class="text-danger mt-1">
           <div *ngIf="signupForm.get('name')?.errors?.['required']">
             Field is required.
+          </div>
+
+          <div *ngIf="signupForm.get('name')?.errors?.['serverError']?.message">
+            {{ signupForm.get('name')?.errors?.['serverError']?.message }}
           </div>
         </div>
       </div>
@@ -34,12 +38,19 @@
           required
           type="email"
         />
+
+
         <div
-          *ngIf="signupForm.get('email')?.invalid && (signupForm.get('email')?.dirty || signupForm.get('email')?.touched)"
+          *ngIf="signupForm.get('email')?.invalid && (signupForm.get('email')?.dirty || signupForm.get('email')?.touched) || signupForm.get('email')?.errors?.['serverError']?.message"
           class="text-danger mt-1">
           <div *ngIf="signupForm.get('email')?.errors?.['required']">
             Field is required.
           </div>
+
+          <div>
+            {{ signupForm.get('email')?.errors?.['serverError']?.message }}
+          </div>
+
         </div>
       </div>
 
@@ -54,20 +65,27 @@
           type="password"
         />
         <div
-          *ngIf="signupForm.get('password')?.invalid && (signupForm.get('password')?.dirty || signupForm.get('password')?.touched)"
+          *ngIf="signupForm.get('password')?.invalid && (signupForm.get('password')?.dirty || signupForm.get('password')?.touched) || signupForm.get('password')?.errors?.['serverError']?.message"
           class="text-danger mt-1">
           <div *ngIf="signupForm.get('password')?.errors?.['required']">
             Field is required.
           </div>
+
+          <div>
+            {{ signupForm.get('password')?.errors?.['serverError']?.message }}
+          </div>
         </div>
       </div>
 
-      <div *ngIf="formIsValid ===false" class="text-center text-danger">
+      <div *ngIf="signupForm.pristine && signupForm.invalid" class="text-center text-danger">
         Form is invalid.
       </div>
 
       <div class="text-end">
-        <button [disabled]="signupForm.invalid" class="btn btn-block btn-dark mt-3" type="submit">Sign up</button>
+        <button [disabled]="signupForm.pristine || signupForm.invalid" class="btn btn-block btn-dark mt-3"
+                type="submit">
+          Sign up
+        </button>
       </div>
     </form>
   </div>

@@ -23,8 +23,6 @@ export class AuthService {
   * Used auth for this frontend:
   * https://github.com/devzom/node-token-based-authentication
   * */
-
-
   constructor(private http: HttpClient, public router: Router) {
   }
 
@@ -115,15 +113,53 @@ export class AuthService {
   }
 
   // Error
+  // handleError(error: HttpErrorResponse) {
+  //   let msg = '';
+  //   if (error.error instanceof ErrorEvent) {
+  //     // client-side error
+  //     msg = error.error.message;
+  //   } else {
+  //     // server-side error
+  //     msg = `Error Code: ${error.status}\nMessage: ${error.message}`;
+  //   }
+  //
+  //   return msg;
+  // }
+
   handleError(error: HttpErrorResponse) {
-    let msg = '';
-    if (error.error instanceof ErrorEvent) {
-      // client-side error
-      msg = error.error.message;
-    } else {
-      // server-side error
-      msg = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    let errorMsg: string;
+
+    if (error.status === 0) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error);
     }
-    return throwError(msg);
+
+    if (error.error instanceof ErrorEvent) {
+      errorMsg = `Error: ${error.error.message}`;
+    } else {
+      console.error(`Error Code: ${error.status}\nMessage: ${error.message}`)
+      errorMsg = error.message;
+    }
+
+    return throwError(error)
   }
+
+  getServerErrorMessage(error: HttpErrorResponse): string {
+    switch (error.status) {
+      case 404: {
+        return `Not Found: ${error.message}`;
+      }
+      case 403: {
+        return `Access Denied: ${error.message}`;
+      }
+      case 500: {
+        return `Internal Server Error: ${error.message}`;
+      }
+      default: {
+        return `Unknown Server Error: ${error.message}`;
+      }
+
+    }
+  }
+
 }
