@@ -7,6 +7,7 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) {
   }
 
+  // https://angular.io/guide/http
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     const authToken = this.authService.getToken();
     req = req.clone({

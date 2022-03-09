@@ -13,11 +13,11 @@ export class ProfileComponent {
 
   constructor(
     public authService: AuthService,
-    private actRoute: ActivatedRoute
+    private route: ActivatedRoute
   ) {
 
     // userId can be read from URl param of from provided storage by AuthService
-    const userId = this.actRoute.snapshot.paramMap?.get('id');
+    const userId = this.route.snapshot.paramMap?.get('id');
     this.authService.getUserProfile(userId)
       .subscribe((res) => {
           this.currentUser = res;

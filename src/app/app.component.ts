@@ -7,7 +7,6 @@ import {Title} from "@angular/platform-browser";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  public counter = 0;
   isOnline: boolean;
 
   constructor(
@@ -19,12 +18,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
 
-
-  fireEvent() {
-    console.log('fireEvent on app-root')
-    this.counter++;
   }
 
   testLog(msg: any = 'test log') {
