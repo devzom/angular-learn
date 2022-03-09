@@ -4,9 +4,13 @@ interface IVehicle {
   make: string;
   year: number;
   grade: string;
-  imageSrc?: string;
-  dailyPrice?: number;
+  imageSrc: string;
 }
+
+interface IVehicles {
+  vehicles: IVehicle[]
+}
+
 
 interface IUser {
   id: string;
@@ -15,10 +19,23 @@ interface IUser {
   password: string;
 }
 
+interface IUsers {
+  users: IUser[]
+}
+
+interface IBooking {
+  userId: number,
+  vehicleId: number
+  price: number,
+  contactPersonId: number
+  bookDate: Date
+  dateFrom: Date,
+  dateTo: Date,
+}
 
 type notUndefined = string | number | boolean | symbol | object
 
-interface Dictionary<T extends notUndefined = notUndefined> {
+interface IDictionary<T extends notUndefined = notUndefined> {
   [key: string]: T | undefined;
 }
 
