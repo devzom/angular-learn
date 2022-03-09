@@ -142,6 +142,8 @@ export class AuthService {
     return error
   }
 
+  // https://www.tektutorialshub.com/angular/angular-http-error-handling/
+  // https://www.tektutorialshub.com/angular/angular-httpclient-http-interceptor/
   async handleError(error: HttpErrorResponse) {
     let errorMsg: string;
 

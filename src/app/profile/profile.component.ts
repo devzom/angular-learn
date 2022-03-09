@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {AuthService} from '../services/auth.service';
 
@@ -8,8 +8,8 @@ import {AuthService} from '../services/auth.service';
   styleUrls: [],
 })
 
-export class ProfileComponent implements OnInit {
-  currentUser: any = {};
+export class ProfileComponent {
+  currentUser: IUser | undefined;
 
   constructor(
     public authService: AuthService,
@@ -20,15 +20,12 @@ export class ProfileComponent implements OnInit {
     const userId = this.actRoute.snapshot.paramMap?.get('id');
     this.authService.getUserProfile(userId)
       .subscribe((res) => {
-          this.currentUser = res.data;
+          this.currentUser = res;
         },
         error => {
           console.log({error})
           this.authService.doLogout()
         }
       )
-  }
-
-  ngOnInit() {
   }
 }

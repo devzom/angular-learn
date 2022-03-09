@@ -11,6 +11,21 @@
           required
           type="email"
         />
+        <div
+          *ngIf="signinForm.get('email')?.invalid && (signinForm.get('email')?.dirty || signinForm.get('email')?.touched) || signinForm.get('email')?.errors?.['serverError']?.message"
+          class="text-danger mt-1">
+          <div *ngIf="signinForm.get('email')?.errors?.['required']">
+            Field is required.
+          </div>
+
+          <div *ngIf="signinForm.get('email')?.errors?.['email']">
+            Invalid email.
+          </div>
+
+          <div>
+            {{ signinForm.get('email')?.errors?.['serverError']?.message }}
+          </div>
+        </div>
       </div>
       <div class="form-group">
         <label>Password</label>
@@ -20,6 +35,17 @@
           placeholder="Password"
           type="password"
         />
+        <div
+          *ngIf="signinForm.get('password')?.invalid && (signinForm.get('password')?.dirty || signinForm.get('password')?.touched) || signinForm.get('password')?.errors?.['serverError']?.message"
+          class="text-danger mt-1">
+          <div *ngIf="signinForm.get('password')?.errors?.['required']">
+            Field is required.
+          </div>
+
+          <div>
+            {{ signinForm.get('password')?.errors?.['serverError']?.message }}
+          </div>
+        </div>
       </div>
       <div class="text-end">
         <button class="btn btn-block btn-dark mt-4" type="submit">Sign in</button>

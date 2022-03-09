@@ -47,6 +47,10 @@
             Field is required.
           </div>
 
+          <div *ngIf="signupForm.get('email')?.errors?.['email']">
+            Invalid email.
+          </div>
+
           <div>
             {{ signupForm.get('email')?.errors?.['serverError']?.message }}
           </div>

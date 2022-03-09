@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
   templateUrl: './signup.component.html',
   styleUrls: [],
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent {
   constructor(
     public authService: AuthService,
     public router: Router
@@ -16,15 +16,12 @@ export class SignupComponent implements OnInit {
   }
 
   isFormValidAndSent: boolean = false
-
+  // https://angular-templates.io/tutorials/about/angular-forms-and-validations
   signupForm = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    name: new FormControl('', {validators: [Validators.required, Validators.minLength(4)], updateOn: 'blur'}),
+    email: new FormControl('', {validators: [Validators.required, Validators.email], updateOn: 'blur'}),
+    password: new FormControl('', {validators: [Validators.required, Validators.minLength(5)], updateOn: 'blur'}),
   })
-
-  ngOnInit() {
-  }
 
   registerUser() {
     this.authService.signUp(this.signupForm.value)
